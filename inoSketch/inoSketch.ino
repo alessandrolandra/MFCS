@@ -8,14 +8,17 @@ const uint8_t boatID=1;
 #define UTR1 //comment if ultrasonic sensor 1 is not present
 #define trigPin1  33
 #define echoPin1  32
-//#define UTR2 //comment if ultrasonic sensor 2 is not present
+#define UTR2 //comment if ultrasonic sensor 2 is not present
 #define trigPin2  25
 #define echoPin2  26
+#define UTR3 //comment if ultrasonic sensor 3 is not present
+#define trigPin3  27
+#define echoPin3  14
 
 void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)());
 
-volatile int64_t startT1,startT2;
-volatile float distance1=0,distance2=0;
+volatile int64_t startT1,startT2,startT3;
+volatile float distance1=0,distance2=0,distance3=0;
 
 esp_timer_handle_t timer;
 
@@ -29,6 +32,10 @@ void setup() {
     #ifdef UTR2
       pinMode(trigPin2, OUTPUT);  
       pinMode(echoPin2, INPUT);
+    #endif
+    #ifdef UTR3
+      pinMode(trigPin3, OUTPUT);  
+      pinMode(echoPin3, INPUT);
     #endif
   
     const esp_timer_create_args_t oneshot_timer_args = {
@@ -50,6 +57,9 @@ void setup() {
     #ifdef UTR2
       triggerMeasure2();
     #endif
+    #ifdef UTR2
+      triggerMeasure3();
+    #endif
 }
     
 void loop() {
@@ -67,6 +77,11 @@ void loop() {
         Serial.print("distance2: ");
         Serial.println(distance2);
         triggerMeasure2();
+      #endif
+      #ifdef UTR3
+        Serial.print("distance3: ");
+        Serial.println(distance3);
+        triggerMeasure3();
       #endif
       /*Serial.print("mean distance: ");
       Serial.println((distance1+distance2)/2);*/
@@ -89,6 +104,9 @@ void triggerMeasure1(){
 void triggerMeasure2(){
     triggerMeasure(trigPin2,echoPin2,startCount2);
 }
+void triggerMeasure3(){
+    triggerMeasure(trigPin3,echoPin3,startCount3);
+}
 
 void startCount(volatile int64_t *start_time,int8_t echo_pin,void (*stop_count_procedure)()){
     *start_time = esp_timer_get_time();
@@ -100,14 +118,17 @@ void startCount1(){
 void startCount2(){
     startCount(&startT2,echoPin2,stopCount2);
 }
+void startCount3(){
+    startCount(&startT3,echoPin3,stopCount3);
+}
 
 void stopCount(volatile int64_t start_time,volatile float *distance,int8_t echo_pin){
     double durationMicros = esp_timer_get_time()-start_time;
     //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
     *distance = durationMicros*0.1715;
-    if(!(*distance>=230 && *distance<=4000)){
+    /*if(!(*distance>=230 && *distance<=4000)){
       *distance=-1;
-    }
+    }*/
     detachInterrupt(echo_pin);    
 }
 void stopCount1(){
@@ -115,6 +136,9 @@ void stopCount1(){
 }
 void stopCount2(){
     stopCount(startT2,&distance2,echoPin2);
+}
+void stopCount3(){
+    stopCount(startT3,&distance3,echoPin3);
 }
 
 static void oneshot_timer_callback(void* arg){}
