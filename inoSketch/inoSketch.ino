@@ -57,7 +57,7 @@ void setup() {
     #ifdef UTR2
       triggerMeasure2();
     #endif
-    #ifdef UTR2
+    #ifdef UTR3
       triggerMeasure3();
     #endif
 }
