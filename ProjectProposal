@@ -1,0 +1,23 @@
+Proposal for collaboration
+
+Proposal for collaboration - The moth flight control system
+The platform and architecture of interest:
+STM32CubeF7 with an STM32746G microcontroller
+
+A short description about the target application and context in which the firmware module can be implemented:
+Application – The moth flight control system aims at replacing the standard mechanical control that allow the moth class skiffs to “fly” over the sea, with an electronic one, which determines the height of the boat using ultrasonic sensors and IMU, and changes consequently the angle of the flap mounted on the drift, to maintain a certain distance from the sea surface. This project comes from a real need of the Polito Sailing Team, a student team which designs and produces racing sailing skiffs and which aims at introducing physically this type of control system.
+Target of the Project - Development of a firmware module for reading data from ultrasonic sensors, interfaced by HC-SR04 drivers (specific circuit JSN-SR04T-3.0), and an inertial platform (Bosch & Hillcrest BNO085) connected through I2C. This data must act as input of a software PID controller that determines the PWM parameters to be sent to a servo motor, to further change the angle of the flap.
+The link to the example code that can be used as a starting point for the development of the firmware modules:
+HC-SR04 https://stm32f4-discovery.net/2014/08/library-30-measure-distance-hc-sr04-stm32f4xx/
+I2C https://stm32f4-discovery.net/2014/05/library-09-i2c-for-stm32f4xx/
+PWM firmware http://stm32f4-discovery.net/2014/05/stm32f4-stm32f429-discovery-pwm-tutorial/
+Link to datasheets and programming manuals:
+STM32F407VG documents 
+https://www.st.com/content/st_com/en/products/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus/stm32-high-performance-mcus/stm32f4-series/stm32f407-417/stm32f407vg.html#documentation
+Datasheets
+STM32F407VG https://www.st.com/resource/en/datasheet/stm32f407vg.pdf
+BNO085 https://learn.adafruit.com/adafruit-9-dof-orientation-imu-fusion-breakout-bno085
+Programming manual
+https://www.st.com/resource/en/programming_manual/dm00046982-stm32-cortexm4-mcus-and-mpus-programming-manual-stmicroelectronics.pdf
+Discovery Kit (Board) STM32F407G-DISC1
+https://www.st.com/resource/en/data_brief/stm32f4discovery.pdf
