@@ -1,19 +1,29 @@
 #define DEB
 
-const uint8_t boatID=1;
+#include <ESP32Servo.h>
 
 //IMU
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
 
-#define UTR1 //comment if ultrasonic sensor 1 is not present
+//#define UTR1 //comment if ultrasonic sensor 1 is not present
 #define trigPin1  33
 #define echoPin1  32
-#define UTR2 //comment if ultrasonic sensor 2 is not present
+//#define UTR2 //comment if ultrasonic sensor 2 is not present
 #define trigPin2  25
 #define echoPin2  26
-#define UTR3 //comment if ultrasonic sensor 3 is not present
+//#define UTR3 //comment if ultrasonic sensor 3 is not present
 #define trigPin3  27
 #define echoPin3  14
+
+#define SERVO //comment if servo is not present
+#define servoPin 12
+
+#define TARGET 80 //target height in mm
+
+//Still to be determined
+#define Ki 0.3
+#define Kp 0.3
+#define Kd 0.3
 
 void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)());
 
@@ -21,6 +31,7 @@ volatile int64_t startT1,startT2,startT3;
 volatile float distance1=0,distance2=0,distance3=0;
 
 esp_timer_handle_t timer;
+Servo srv;
 
 void setup() {
     Serial.begin(115200);
@@ -60,11 +71,17 @@ void setup() {
     #ifdef UTR3
       triggerMeasure3();
     #endif
+
+    #ifdef SERVO
+      init_servo();
+    #endif
 }
     
 void loop() {
     static uint32_t timer=0;  
-    
+    static int8_t rotationAngle;
+    static int32_t measuredHeight,error,prevError=0;
+    static float cumulativeError,rateError;
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
       timer = millis(); // reset the timer
 
@@ -83,8 +100,17 @@ void loop() {
         Serial.println(distance3);
         triggerMeasure3();
       #endif
-      /*Serial.print("mean distance: ");
-      Serial.println((distance1+distance2)/2);*/
+      measuredHeight = (((distance2+distance3)/2)+distance1)/2;
+      Serial.print("height: ");
+      Serial.println(measuredHeight);
+      error = TARGET - measuredHeight;
+      cumulativeError = error * (SAMPLERATE_DELAY_MS / 1000); //integral of the error, SAMPLERATE is the elapsed time
+      rateError = (error - prevError)/(SAMPLERATE_DELAY_MS / 1000); //derivative of the error      
+      rotationAngle = (int8_t)(Kp * error + Ki * cumulativeError + Kd * rateError);
+      #ifdef SERVO        
+        srv.write(rotationAngle);
+      #endif
+      prevError = error;
     }
 }
 
@@ -142,3 +168,7 @@ void stopCount3(){
 }
 
 static void oneshot_timer_callback(void* arg){}
+
+void init_servo(){
+   srv.attach(servoPin); 
+}
