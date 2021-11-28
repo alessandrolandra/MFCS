@@ -1,8 +1,8 @@
 #define DEB
 
 #include <ESP32Servo.h>
+#include <PID_v1.h>
 
-//IMU
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
 
 //#define UTR1 //comment if ultrasonic sensor 1 is not present
@@ -18,20 +18,22 @@
 #define SERVO //comment if servo is not present
 #define servoPin 12
 
-#define TARGET 80 //target height in mm
-
-//Still to be determined
-#define Ki 0.3
-#define Kp 0.3
-#define Kd 0.3
+//aggressive PID parameters
+double aggKi=0.2,aggKp=4,aggKd=1;
+//conservative PID parameters
+double consKi=0.05,consKp=1,consKd=0.25;
 
 void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)());
+
+double target=800;//target height in mm
+double measuredHeight, rotationAngle;//PID input and output
 
 volatile int64_t startT1,startT2,startT3;
 volatile float distance1=0,distance2=0,distance3=0;
 
 esp_timer_handle_t timer;
 Servo srv;
+PID myPID(&measuredHeight, &rotationAngle, &target, consKp, consKi, consKd, DIRECT);
 
 void setup() {
     Serial.begin(115200);
@@ -75,15 +77,16 @@ void setup() {
     #ifdef SERVO
       init_servo();
     #endif
+
+    myPID.SetMode(AUTOMATIC);
+    myPID.SetOutputLimits(0, 20);//10-13 degrees down, 8-9 degrees up
 }
     
 void loop() {
-    static uint32_t timer=0;  
-    static int8_t rotationAngle;
-    static int32_t measuredHeight,error,prevError=0;
-    static float cumulativeError,rateError;
+    static uint32_t timer=0;
+    static double gap;
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
-      timer = millis(); // reset the timer
+      timer = millis();//reset the timer
 
       #ifdef UTR1
         Serial.print("distance1: ");
@@ -103,14 +106,16 @@ void loop() {
       measuredHeight = (((distance2+distance3)/2)+distance1)/2;
       Serial.print("height: ");
       Serial.println(measuredHeight);
-      error = TARGET - measuredHeight;
-      cumulativeError = error * (SAMPLERATE_DELAY_MS / 1000); //integral of the error, SAMPLERATE is the elapsed time
-      rateError = (error - prevError)/(SAMPLERATE_DELAY_MS / 1000); //derivative of the error      
-      rotationAngle = (int8_t)(Kp * error + Ki * cumulativeError + Kd * rateError);
+      gap = abs(target-measuredHeight);//distance away from target
+      if (gap < 50){//close to target, use conservative tuning parameters
+          myPID.SetTunings(consKp, consKi, consKd);
+      }else{//far from target, use aggressive tuning parameters
+          myPID.SetTunings(aggKp, aggKi, aggKd);
+      }
+      myPID.Compute();
       #ifdef SERVO        
         srv.write(rotationAngle);
       #endif
-      prevError = error;
     }
 }
 
