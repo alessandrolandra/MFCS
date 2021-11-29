@@ -1,0 +1,11 @@
+
+:name: STM32f411re
+
+$bin?="/Users/luca/Desktop/STM32F411RE/PST_FlightControl/LedSwitch/build/LED2_switch.elf"
+
+using sysbus
+mach create "myNucleo"
+machine LoadPlatformDescription @platforms/cpus/stm32f4.repl
+sysbus LoadELF $bin
+start
+machine StartGdbServer 3333

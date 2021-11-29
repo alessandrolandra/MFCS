@@ -1,0 +1,568 @@
+Archive member included to satisfy reference by file (symbol)
+
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o (exit)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o) (_global_impure_ptr)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o (__libc_init_array)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o (memset)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o) (__call_exitprocs)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o) (atexit)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o) (__libc_fini_array)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o) (__retarget_lock_acquire_recursive)
+/Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
+                              /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o) (__register_exitproc)
+
+Discarded input sections
+
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .data          0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .rodata        0x0000000000000000       0x24 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .text          0x0000000000000000       0x7c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .ARM.extab     0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .ARM.exidx     0x0000000000000000       0x10 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .ARM.attributes
+                0x0000000000000000       0x1c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .group         0x0000000000000000        0xc build/src/system_stm32f4xx.o
+ .text          0x0000000000000000        0x0 build/src/system_stm32f4xx.o
+ .data          0x0000000000000000        0x0 build/src/system_stm32f4xx.o
+ .bss           0x0000000000000000        0x0 build/src/system_stm32f4xx.o
+ .data.SystemCoreClock
+                0x0000000000000000        0x4 build/src/system_stm32f4xx.o
+ .rodata.AHBPrescTable
+                0x0000000000000000       0x10 build/src/system_stm32f4xx.o
+ .rodata.APBPrescTable
+                0x0000000000000000        0x8 build/src/system_stm32f4xx.o
+ .text.SystemCoreClockUpdate
+                0x0000000000000000      0x100 build/src/system_stm32f4xx.o
+ .text          0x0000000000000000       0x14 build/src/startup_stm32f411xe.o
+ .data          0x0000000000000000        0x0 build/src/startup_stm32f411xe.o
+ .bss           0x0000000000000000        0x0 build/src/startup_stm32f411xe.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .group         0x0000000000000000        0xc build/./main.o
+ .text          0x0000000000000000        0x0 build/./main.o
+ .data          0x0000000000000000        0x0 build/./main.o
+ .bss           0x0000000000000000        0x0 build/./main.o
+ .debug_macro   0x0000000000000000      0xa6c build/./main.o
+ .debug_macro   0x0000000000000000       0x28 build/./main.o
+ .debug_macro   0x0000000000000000       0x22 build/./main.o
+ .debug_macro   0x0000000000000000       0x56 build/./main.o
+ .debug_macro   0x0000000000000000       0x51 build/./main.o
+ .debug_macro   0x0000000000000000      0x103 build/./main.o
+ .debug_macro   0x0000000000000000       0x6a build/./main.o
+ .debug_macro   0x0000000000000000      0x1df build/./main.o
+ .debug_macro   0x0000000000000000       0x1c build/./main.o
+ .debug_macro   0x0000000000000000       0x22 build/./main.o
+ .debug_macro   0x0000000000000000       0xd9 build/./main.o
+ .debug_macro   0x0000000000000000     0x102d build/./main.o
+ .debug_macro   0x0000000000000000      0x11f build/./main.o
+ .debug_macro   0x0000000000000000     0xb937 build/./main.o
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+ .text.exit     0x0000000000000000       0x20 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+ .debug_frame   0x0000000000000000       0x28 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-exit.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+ .text.memset   0x0000000000000000       0xa4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000000       0x2c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000000       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .text.__call_exitprocs
+                0x0000000000000000       0xc4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_init
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_init_recursive
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_close
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_close_recursive
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire_recursive
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text.__retarget_lock_release
+                0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___arc4random_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___at_quick_exit_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___dd_hash_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___env_recursive_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___malloc_recursive_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___sfp_recursive_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___sinit_recursive_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .bss.__lock___tz_mutex
+                0x0000000000000000        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .rodata        0x0000000000000000       0x24 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .eh_frame      0x0000000000000000        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .ARM.attributes
+                0x0000000000000000       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+ .text          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ .data          0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ .bss           0x0000000000000000        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+RAM              0x0000000020000000 0x0000000000020000 xrw
+ROM              0x0000000008000000 0x0000000000080000 xr
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/crt0.o
+LOAD build/src/system_stm32f4xx.o
+LOAD build/src/startup_stm32f411xe.o
+LOAD build/./main.o
+START GROUP
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a
+END GROUP
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtend.o
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+                0x0000000020020000                _estack = 0x20020000
+                0x0000000000000000                _Min_Heap_Size = 0x0
+                0x0000000000000400                _Min_Stack_Size = 0x400
+
+.isr_vector     0x0000000008000000      0x1a8
+                0x0000000008000000                . = ALIGN (0x4)
+ *(.isr_vector)
+ .isr_vector    0x0000000008000000      0x1a8 build/src/startup_stm32f411xe.o
+                0x0000000008000000                isr_vector
+                0x00000000080001a8                . = ALIGN (0x4)
+
+.text           0x00000000080001a8      0x270
+                0x00000000080001a8                . = ALIGN (0x4)
+ *(.text)
+ .text          0x00000000080001a8       0x40 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ *(.text*)
+ .text.SystemInit
+                0x00000000080001e8        0xc build/src/system_stm32f4xx.o
+                0x00000000080001e8                SystemInit
+ .text.Reset_Handler
+                0x00000000080001f4       0x50 build/src/startup_stm32f411xe.o
+                0x00000000080001f4                Reset_Handler
+ .text.Default_Handler
+                0x0000000008000244        0x2 build/src/startup_stm32f411xe.o
+                0x0000000008000244                DMA1_Stream3_IRQHandler
+                0x0000000008000244                HASH_RNG_IRQHandler
+                0x0000000008000244                EXTI2_IRQHandler
+                0x0000000008000244                TIM8_CC_IRQHandler
+                0x0000000008000244                DebugMon_Handler
+                0x0000000008000244                TIM1_CC_IRQHandler
+                0x0000000008000244                DMA2_Stream5_IRQHandler
+                0x0000000008000244                HardFault_Handler
+                0x0000000008000244                DMA1_Stream5_IRQHandler
+                0x0000000008000244                SysTick_Handler
+                0x0000000008000244                PVD_IRQHandler
+                0x0000000008000244                SDIO_IRQHandler
+                0x0000000008000244                TAMP_STAMP_IRQHandler
+                0x0000000008000244                PendSV_Handler
+                0x0000000008000244                NMI_Handler
+                0x0000000008000244                CAN2_RX1_IRQHandler
+                0x0000000008000244                EXTI3_IRQHandler
+                0x0000000008000244                TIM8_TRG_COM_TIM14_IRQHandler
+                0x0000000008000244                TIM1_UP_TIM10_IRQHandler
+                0x0000000008000244                TIM8_UP_TIM13_IRQHandler
+                0x0000000008000244                I2C3_ER_IRQHandler
+                0x0000000008000244                LCD_TFT_IRQHandler
+                0x0000000008000244                EXTI0_IRQHandler
+                0x0000000008000244                I2C2_EV_IRQHandler
+                0x0000000008000244                DMA1_Stream2_IRQHandler
+                0x0000000008000244                CAN1_RX0_IRQHandler
+                0x0000000008000244                FPU_IRQHandler
+                0x0000000008000244                OTG_HS_WKUP_IRQHandler
+                0x0000000008000244                UsageFault_Handler
+                0x0000000008000244                CAN2_SCE_IRQHandler
+                0x0000000008000244                DMA2_Stream2_IRQHandler
+                0x0000000008000244                SPI1_IRQHandler
+                0x0000000008000244                TIM6_DAC_IRQHandler
+                0x0000000008000244                TIM1_BRK_TIM9_IRQHandler
+                0x0000000008000244                DCMI_IRQHandler
+                0x0000000008000244                CAN2_RX0_IRQHandler
+                0x0000000008000244                DMA2_Stream3_IRQHandler
+                0x0000000008000244                USART6_IRQHandler
+                0x0000000008000244                USART3_IRQHandler
+                0x0000000008000244                CRYP_IRQHandler
+                0x0000000008000244                CAN1_RX1_IRQHandler
+                0x0000000008000244                UART5_IRQHandler
+                0x0000000008000244                DMA2_Stream0_IRQHandler
+                0x0000000008000244                TIM4_IRQHandler
+                0x0000000008000244                I2C1_EV_IRQHandler
+                0x0000000008000244                DMA1_Stream6_IRQHandler
+                0x0000000008000244                DMA1_Stream1_IRQHandler
+                0x0000000008000244                UART4_IRQHandler
+                0x0000000008000244                LCD_TFT_1_IRQHandler
+                0x0000000008000244                TIM3_IRQHandler
+                0x0000000008000244                RCC_IRQHandler
+                0x0000000008000244                TIM8_BRK_TIM12_IRQHandler
+                0x0000000008000244                Default_Handler
+                0x0000000008000244                EXTI15_10_IRQHandler
+                0x0000000008000244                ADC_IRQHandler
+                0x0000000008000244                DMA1_Stream7_IRQHandler
+                0x0000000008000244                TIM7_IRQHandler
+                0x0000000008000244                CAN2_TX_IRQHandler
+                0x0000000008000244                TIM5_IRQHandler
+                0x0000000008000244                DMA2_Stream7_IRQHandler
+                0x0000000008000244                I2C3_EV_IRQHandler
+                0x0000000008000244                EXTI9_5_IRQHandler
+                0x0000000008000244                RTC_WKUP_IRQHandler
+                0x0000000008000244                ETH_WKUP_IRQHandler
+                0x0000000008000244                SPI2_IRQHandler
+                0x0000000008000244                OTG_HS_EP1_IN_IRQHandler
+                0x0000000008000244                MemManage_Handler
+                0x0000000008000244                DMA1_Stream0_IRQHandler
+                0x0000000008000244                CAN1_TX_IRQHandler
+                0x0000000008000244                SVC_Handler
+                0x0000000008000244                EXTI4_IRQHandler
+                0x0000000008000244                FSMC_IRQHandler
+                0x0000000008000244                ETH_IRQHandler
+                0x0000000008000244                OTG_HS_EP1_OUT_IRQHandler
+                0x0000000008000244                WWDG_IRQHandler
+                0x0000000008000244                TIM2_IRQHandler
+                0x0000000008000244                OTG_FS_WKUP_IRQHandler
+                0x0000000008000244                TIM1_TRG_COM_TIM11_IRQHandler
+                0x0000000008000244                OTG_HS_IRQHandler
+                0x0000000008000244                EXTI1_IRQHandler
+                0x0000000008000244                USART2_IRQHandler
+                0x0000000008000244                I2C2_ER_IRQHandler
+                0x0000000008000244                DMA2_Stream1_IRQHandler
+                0x0000000008000244                CAN1_SCE_IRQHandler
+                0x0000000008000244                DMA2_Stream4_IRQHandler
+                0x0000000008000244                BusFault_Handler
+                0x0000000008000244                USART1_IRQHandler
+                0x0000000008000244                OTG_FS_IRQHandler
+                0x0000000008000244                SPI3_IRQHandler
+                0x0000000008000244                DMA1_Stream4_IRQHandler
+                0x0000000008000244                I2C1_ER_IRQHandler
+                0x0000000008000244                DMA2_Stream6_IRQHandler
+                0x0000000008000244                RTC_Alarm_IRQHandler
+ *fill*         0x0000000008000246        0x2 
+ .text.main     0x0000000008000248       0x58 build/./main.o
+                0x0000000008000248                main
+ .text.busy_delay
+                0x00000000080002a0       0x38 build/./main.o
+                0x00000000080002a0                busy_delay
+ .text.__libc_init_array
+                0x00000000080002d8       0x48 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+                0x00000000080002d8                __libc_init_array
+ .text.startup.register_fini
+                0x0000000008000320       0x14 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .text.atexit   0x0000000008000334        0xc /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+                0x0000000008000334                atexit
+ .text.__libc_fini_array
+                0x0000000008000340       0x2c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+                0x0000000008000340                __libc_fini_array
+ .text.__retarget_lock_acquire_recursive
+                0x000000000800036c        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+                0x000000000800036c                __retarget_lock_acquire_recursive
+ .text.__retarget_lock_release_recursive
+                0x0000000008000370        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+                0x0000000008000370                __retarget_lock_release_recursive
+ .text.__register_exitproc
+                0x0000000008000374       0x8c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
+                0x0000000008000374                __register_exitproc
+ *(.glue_7)
+ .glue_7        0x0000000008000400        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x0000000008000400        0x0 linker stubs
+ *(.eh_frame)
+ .eh_frame      0x0000000008000400        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ *(.init)
+ .init          0x0000000008000400        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                0x0000000008000400                _init
+ .init          0x0000000008000404        0x8 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+ *(.fini)
+ .fini          0x000000000800040c        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+                0x000000000800040c                _fini
+ .fini          0x0000000008000410        0x8 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+                0x0000000008000418                . = ALIGN (0x4)
+                0x0000000008000418                _etext = .
+
+.vfp11_veneer   0x0000000008000418        0x0
+ .vfp11_veneer  0x0000000008000418        0x0 linker stubs
+
+.v4_bx          0x0000000008000418        0x0
+ .v4_bx         0x0000000008000418        0x0 linker stubs
+
+.iplt           0x0000000008000418        0x0
+ .iplt          0x0000000008000418        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+
+.rodata         0x0000000008000418        0x4
+                0x0000000008000418                . = ALIGN (0x4)
+ *(.rodata)
+ *(.rodata*)
+ .rodata._global_impure_ptr
+                0x0000000008000418        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+                0x0000000008000418                _global_impure_ptr
+                0x000000000800041c                . = ALIGN (0x4)
+
+.rel.dyn        0x000000000800041c        0x0
+ .rel.iplt      0x000000000800041c        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+
+.ARM.extab      0x000000000800041c        0x0
+                0x000000000800041c                . = ALIGN (0x4)
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x000000000800041c                . = ALIGN (0x4)
+
+.ARM            0x000000000800041c        0x0
+                0x000000000800041c                . = ALIGN (0x4)
+                0x000000000800041c                __exidx_start = .
+ *(.ARM.exidx*)
+                0x000000000800041c                __exidx_end = .
+                0x000000000800041c                . = ALIGN (0x4)
+
+.preinit_array  0x000000000800041c        0x0
+                0x000000000800041c                . = ALIGN (0x4)
+                0x000000000800041c                PROVIDE (__preinit_array_start = .)
+ *(.preinit_array*)
+                0x000000000800041c                PROVIDE (__preinit_array_end = .)
+                0x000000000800041c                . = ALIGN (0x4)
+
+.init_array     0x000000000800041c        0x8
+                0x000000000800041c                . = ALIGN (0x4)
+                0x000000000800041c                PROVIDE (__init_array_start = .)
+ *(SORT_BY_NAME(.init_array.*))
+ .init_array.00000
+                0x000000000800041c        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ *(.init_array*)
+ .init_array    0x0000000008000420        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                0x0000000008000424                PROVIDE (__init_array_end = .)
+                0x0000000008000424                . = ALIGN (0x4)
+
+.fini_array     0x0000000008000424        0x4
+                0x0000000008000424                . = ALIGN (0x4)
+                0x0000000008000424                PROVIDE (__fini_array_start = .)
+ *(SORT_BY_NAME(.fini_array.*))
+ *(.fini_array*)
+ .fini_array    0x0000000008000424        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                0x0000000008000428                PROVIDE (__fini_array_end = .)
+                0x0000000008000428                . = ALIGN (0x4)
+                0x0000000008000428                _sidata = LOADADDR (.data)
+
+.data           0x0000000020000000      0x42c load address 0x0000000008000428
+                0x0000000020000000                . = ALIGN (0x4)
+                0x0000000020000000                _sdata = .
+ *(.data)
+ *(.data*)
+ .data.impure_data
+                0x0000000020000000      0x428 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+ .data.__atexit_recursive_mutex
+                0x0000000020000428        0x4 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+                0x0000000020000428                __atexit_recursive_mutex
+                0x000000002000042c                . = ALIGN (0x4)
+                0x000000002000042c                _edata = .
+
+.igot.plt       0x000000002000042c        0x0 load address 0x0000000008000854
+ .igot.plt      0x000000002000042c        0x0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+                0x000000002000042c                . = ALIGN (0x4)
+
+.bss            0x000000002000042c       0x20 load address 0x0000000008000854
+                0x000000002000042c                _sbss = .
+                0x000000002000042c                __bss_start__ = _sbss
+ *(.bss)
+ .bss           0x000000002000042c       0x1c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ *(.bss*)
+ .bss.__lock___atexit_recursive_mutex
+                0x0000000020000448        0x1 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+                0x0000000020000448                __lock___atexit_recursive_mutex
+ *(COMMON)
+                0x000000002000044c                . = ALIGN (0x4)
+ *fill*         0x0000000020000449        0x3 
+                0x000000002000044c                _ebss = .
+                0x000000002000044c                __bss_end__ = _ebss
+
+._user_heap_stack
+                0x000000002000044c      0x404 load address 0x0000000008000854
+                0x0000000020000450                . = ALIGN (0x8)
+ *fill*         0x000000002000044c        0x4 
+                [!provide]                        PROVIDE (end = .)
+                [!provide]                        PROVIDE (_end = .)
+                0x0000000020000450                . = (. + _Min_Heap_Size)
+                0x0000000020000850                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020000450      0x400 
+                0x0000000020000850                . = ALIGN (0x8)
+
+/DISCARD/
+ libc.a(*)
+ libm.a(*)
+ libgcc.a(*)
+
+.ARM.attributes
+                0x0000000000000000       0x2a
+ *(.ARM.attributes)
+ .ARM.attributes
+                0x0000000000000000       0x1e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crti.o
+ .ARM.attributes
+                0x000000000000001e       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtbegin.o
+ .ARM.attributes
+                0x000000000000004c       0x2e build/src/system_stm32f4xx.o
+ .ARM.attributes
+                0x000000000000007a       0x21 build/src/startup_stm32f411xe.o
+ .ARM.attributes
+                0x000000000000009b       0x2e build/./main.o
+ .ARM.attributes
+                0x00000000000000c9       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000000000000f7       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+ .ARM.attributes
+                0x0000000000000125       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .ARM.attributes
+                0x0000000000000153       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+ .ARM.attributes
+                0x0000000000000181       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+ .ARM.attributes
+                0x00000000000001af       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .ARM.attributes
+                0x00000000000001dd       0x2e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x000000000000020b       0x1e /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/crtn.o
+OUTPUT(build/LED2_switch.elf elf32-littlearm)
+LOAD linker stubs
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a
+LOAD /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7e-m/nofp/libgcc.a
+
+.debug_info     0x0000000000000000      0x726
+ .debug_info    0x0000000000000000      0x38d build/src/system_stm32f4xx.o
+ .debug_info    0x000000000000038d       0x22 build/src/startup_stm32f411xe.o
+ .debug_info    0x00000000000003af      0x377 build/./main.o
+
+.debug_abbrev   0x0000000000000000      0x217
+ .debug_abbrev  0x0000000000000000      0x116 build/src/system_stm32f4xx.o
+ .debug_abbrev  0x0000000000000116       0x12 build/src/startup_stm32f411xe.o
+ .debug_abbrev  0x0000000000000128       0xef build/./main.o
+
+.debug_aranges  0x0000000000000000       0x78
+ .debug_aranges
+                0x0000000000000000       0x28 build/src/system_stm32f4xx.o
+ .debug_aranges
+                0x0000000000000028       0x28 build/src/startup_stm32f411xe.o
+ .debug_aranges
+                0x0000000000000050       0x28 build/./main.o
+
+.debug_ranges   0x0000000000000000       0x50
+ .debug_ranges  0x0000000000000000       0x18 build/src/system_stm32f4xx.o
+ .debug_ranges  0x0000000000000018       0x20 build/src/startup_stm32f411xe.o
+ .debug_ranges  0x0000000000000038       0x18 build/./main.o
+
+.debug_macro    0x0000000000000000     0xdbcd
+ .debug_macro   0x0000000000000000       0xcb build/src/system_stm32f4xx.o
+ .debug_macro   0x00000000000000cb      0xa6c build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000b37       0x28 build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000b5f       0x22 build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000b81       0x56 build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000bd7       0x51 build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000c28      0x103 build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000d2b       0x6a build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000d95      0x1df build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000f74       0x1c build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000f90       0x22 build/src/system_stm32f4xx.o
+ .debug_macro   0x0000000000000fb2       0xd9 build/src/system_stm32f4xx.o
+ .debug_macro   0x000000000000108b     0x102d build/src/system_stm32f4xx.o
+ .debug_macro   0x00000000000020b8      0x11f build/src/system_stm32f4xx.o
+ .debug_macro   0x00000000000021d7     0xb937 build/src/system_stm32f4xx.o
+ .debug_macro   0x000000000000db0e       0xbf build/./main.o
+
+.debug_line     0x0000000000000000      0x646
+ .debug_line    0x0000000000000000      0x30c build/src/system_stm32f4xx.o
+ .debug_line    0x000000000000030c       0x7b build/src/startup_stm32f411xe.o
+ .debug_line    0x0000000000000387      0x2bf build/./main.o
+
+.debug_str      0x0000000000000000    0x4f1e4
+ .debug_str     0x0000000000000000    0x4f173 build/src/system_stm32f4xx.o
+                                      0x4f2e4 (size before relaxing)
+ .debug_str     0x000000000004f173       0x28 build/src/startup_stm32f411xe.o
+                                         0x52 (size before relaxing)
+ .debug_str     0x000000000004f19b       0x49 build/./main.o
+                                      0x4f25e (size before relaxing)
+
+.comment        0x0000000000000000       0x49
+ .comment       0x0000000000000000       0x49 build/src/system_stm32f4xx.o
+                                         0x4a (size before relaxing)
+ .comment       0x0000000000000049       0x4a build/./main.o
+
+.debug_frame    0x0000000000000000      0x26c
+ .debug_frame   0x0000000000000000       0x58 build/src/system_stm32f4xx.o
+ .debug_frame   0x0000000000000058       0x54 build/./main.o
+ .debug_frame   0x00000000000000ac       0x2c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-init.o)
+ .debug_frame   0x00000000000000d8       0x5c /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x0000000000000134       0x20 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-atexit.o)
+ .debug_frame   0x0000000000000154       0x34 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-fini.o)
+ .debug_frame   0x0000000000000188       0xb0 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-lock.o)
+ .debug_frame   0x0000000000000238       0x34 /Users/luca/Documents/gcc-arm-none-eabi-10.3-2021.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a(lib_a-__atexit.o)
