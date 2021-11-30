@@ -1,4 +1,5 @@
 #include <stm32f411xe.h>
+#include <Ultrasonic.h>
 
 #define TARGET 800 //target height in mm
 
