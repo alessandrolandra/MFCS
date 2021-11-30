@@ -1,4 +1,7 @@
-#include <stm32f411xe.h>
+//#include <stm32f411xe.h>
+#include "arm_math.h"
+#include "tm_stm32f4_delay.h"
+#include "tm_stm32f4_servo.h"
 
 #define TARGET 800 //target height in mm
 
@@ -12,6 +15,14 @@
 
 arm_pid_instance_f32 PID;
 
+/* Uncomment to set custom pulse length for 0° rotation */
+//#define SERVO_MICROS_MIN    1000
+ 
+/* Uncomment to set custom pulse length for 180° rotation */
+//#define SERVO_MICROS_MAX    2000
+
+TM_SERVO_t srv;
+
 int main(){
 
   PID.Kp = AGG_KP;
@@ -24,7 +35,7 @@ int main(){
   /*myPID.SetMode(AUTOMATIC);
   myPID.SetOutputLimits(0, 20);//10-13 degrees down, 8-9 degrees up*/
 
-/*
+  /*
   //Timer data for PWM
   TM_PWM_TIM_t TIM_Data;
   //Initialize TIM2, 1kHz frequency
@@ -33,9 +44,16 @@ int main(){
   TM_PWM_InitChannel(&TIM_Data, TM_PWM_Channel_1, TM_PWM_PinsPack_2);    
   //Set default duty cycle
   TM_PWM_SetChannelPercent(&TIM_Data, TM_PWM_Channel_1, duty);
-*/
+
+  //Set PWM duty cycle for DC FAN to cool down sensor for "TEMP_CURRENT"
+  TM_PWM_SetChannelPercent(&TIM_Data, TM_PWM_Channel_1, duty);
+  */
 
   SystemInit();
+
+  TM_DELAY_Init();
+
+  TM_SERVO_Init(&srv, TIM2, TM_PWM_Channel_1, TM_PWM_PinsPack_2);
 
   /*#ifdef UTR1
     pinMode(trigPin1, OUTPUT);
@@ -58,15 +76,11 @@ int main(){
   #endif
   #ifdef UTR3
     triggerMeasure3();
-  #endif
-
-  #ifdef SERVO
-    init_servo();
-  #endif  
-  */
+  #endif*/
 
   while (1) {
-    
+    updateAngle();
+    Delayms(500);
   } 
 }
 
@@ -89,8 +103,7 @@ void updateAngle(){
           
   /* Calculate PID here, argument is error */
   /* Output data will be returned, we will use it as duty cycle parameter */
-  rotationAngle = arm_pid_f32(&PID, gap);
-           
-  /* Set PWM duty cycle for DC FAN to cool down sensor for "TEMP_CURRENT" */
-  //TM_PWM_SetChannelPercent(&TIM_Data, TM_PWM_Channel_1, duty);
+  rotationAngle = arm_pid_f32(&PID, gap);           
+  
+  TM_SERVO_SetDegrees(&Servo1, rotationAngle);
 }
