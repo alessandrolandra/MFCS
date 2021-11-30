@@ -1,5 +1,8 @@
-#include <stm32f411xe.h>
-#include <Ultrasonic.h>
+//#include <stm32f411xe.h>
+//#include <Ultrasonic.h>
+#include "tm_stm32f4_delay.h"
+#include "tm_stm32f4_servo.h"
+#include "arm_math.h"
 
 #define TARGET 800 //target height in mm
 
@@ -103,5 +106,5 @@ void updateAngle(){
   /* Output data will be returned, we will use it as duty cycle parameter */
   rotationAngle = arm_pid_f32(&PID, gap);           
   
-  TM_SERVO_SetDegrees(&Servo1, rotationAngle);
+  TM_SERVO_SetDegrees(&srv, rotationAngle);
 }
