@@ -94,9 +94,12 @@ Degrees (pulse_length) = (pulse_length – MIN) * 180 / (MAX – MIN)
 
 #include "stm32f4xx.h"
 #include "stm32f4xx_rcc.h"
+//#include "stm32f4xx_hal_rcc.h"
 #include "stm32f4xx_gpio.h"
+//#include "stm32f4xx_hal_gpio.h"
 #include "stm32f4xx_tim.h"
-#include "defines.h"
+//#include "stm32f4xx_hal_tim.h"
+//#include "defines.h"
 #include "tm_stm32f4_pwm.h"
 #include "tm_stm32f4_timer_properties.h"
 

@@ -1,4 +1,4 @@
-//#include <stm32f411xe.h>
+#include <stm32f411xe.h>
 //#include <Ultrasonic.h>
 #include "tm_stm32f4_delay.h"
 #include "tm_stm32f4_servo.h"
@@ -23,6 +23,8 @@ arm_pid_instance_f32 PID;
 //#define SERVO_MICROS_MAX    2000
 
 TM_SERVO_t srv;
+
+void updateAngle();
 
 int main(){
 
@@ -89,7 +91,8 @@ void updateAngle(){
   float measuredHeight,gap;
   int rotationAngle;
 
-  measuredHeight = (((distance2+distance3)/2)+distance1)/2;
+  //measuredHeight = (((distance2+distance3)/2)+distance1)/2;
+  measuredHeight = 0;
   /* Calculate error */
   gap = abs(measuredHeight - TARGET);
   if (gap < 50){//close to target, use conservative tuning parameters
