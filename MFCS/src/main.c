@@ -21,6 +21,20 @@
 #define CONS_KI 0.05
 #define CONS_KD 0.25
 
+//ULTRASONIC
+#define UTR1
+//#define UTR1 //comment if ultrasonic sensor 1 is not present
+#define trigPin1  0
+#define echoPin1  3
+//#define UTR2 //comment if ultrasonic sensor 2 is not present
+#define trigPin2  1
+#define echoPin2  4
+//#define UTR3 //comment if ultrasonic sensor 3 is not present
+#define trigPin3  2
+#define echoPin3  5
+
+#define CLK_freqMHz 100  //clock frequency equal to 100 MHZ
+
 /* Uncomment to set custom pulse length for 0° rotation */
 //#define SERVO_MICROS_MIN    1000
  
@@ -34,6 +48,10 @@ const char Mx1[7][5]={{0x12,0x45,0xF2,0xA8},{0xB2,0x6C,0x39,0x83},{0x55,0xE5,0xD
 int abs(int x);
 void updateAngle(arm_pid_instance_q31* PID,int8_t target,int8_t sens_threshold);
 int8_t readRFID();
+volatile int64_t startTime1, startTime2, startTime3;
+volatile float distance1 = 0, distance2 = 0, distance3 = 0;
+
+unsigned long getCurrentUS();
 
 int main(){
   static arm_pid_instance_q31 PID;
@@ -66,33 +84,20 @@ int main(){
   */
 
   SystemInit();
-
-  //TM_DELAY_Init();
+  myGPIO_INIT();
+  USCounter_INIT();
 
   //TM_SERVO_Init(&srv, TIM2, TM_PWM_Channel_1, TM_PWM_PinsPack_2);
-
-  /*#ifdef UTR1
-    pinMode(trigPin1, OUTPUT);
-    pinMode(echoPin1, INPUT);
-  #endif
-  #ifdef UTR2
-    pinMode(trigPin2, OUTPUT);  
-    pinMode(echoPin2, INPUT);
-  #endif
-  #ifdef UTR3
-    pinMode(trigPin3, OUTPUT);  
-    pinMode(echoPin3, INPUT);
-  #endif
-  
+ 
   #ifdef UTR1
-    triggerMeasure1();
+    triggerMeasure(trigPin1, echoPin1, startCount(&startTime1, echoPin1, stopCount(startTime1, &distance1, echoPin1)));
   #endif
   #ifdef UTR2
-    triggerMeasure2();
+    triggerMeasure();
   #endif
   #ifdef UTR3
-    triggerMeasure3();
-  #endif*/
+    triggerMeasure();
+  #endif
 
   // Update SystemCoreClock variable
   SystemCoreClockUpdate();
@@ -180,4 +185,55 @@ int8_t readRFID(){
 	}else{
 	  //Waiting for Card
 	}
+}
+
+void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)()){
+    // Clears the trigPin
+    //digitalWrite(trig_pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOA, trig_pin, GPIO_PIN_RESET);
+    delayMicroseconds(2);
+    // Sets the trigPin on HIGH state for 10 micro seconds
+    HAL_GPIO_WritePin(GPIOA, trig_pin, GPIO_PIN_SET);
+    delayMicroseconds(10);
+
+    HAL_GPIO_WritePin(GPIOA, trig_pin, GPIO_PIN_RESET);
+    attachInterrupt(echo_pin, start_count_procedure, TRIGGER_RISING);
+}
+
+void startCount(volatile unsigned long *startTime, int8_t echo_pin,void (*stop_count_procedure)()){
+    *startTime = getCurrentUS();
+    attachInterrupt(echo_pin, stop_count_procedure, TRIGGER_FALLING);
+}
+
+void stopCount(volatile unsigned long startTime, volatile float *distance,int8_t echo_pin){
+    unsigned long durationMicros = startTime - getCurrentUS();
+    //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
+    *distance = durationMicros*0.1715;
+    /*if(!(*distance>=230 && *distance<=4000)){
+      *distance=-1;
+    }*/
+    detachInterrupt(echo_pin);    
+}
+
+void myGPIO_INIT(){
+
+  RCC->AHB1ENR |= 0x1; //0001 IO portA clock enable
+  GPIOA -> MODER = 0x00000007; //binary 00..00000111 port A0,A1,A2 set as output;  A3,A4,A5 used as input
+  GPIOA -> OTYPER |= 0x0000003F; //00..00111111 to set Push-Pull 
+  GPIOA -> PUPDR |= 0x00000AAA; //00.000101010101010 to set as pull down
+}
+
+void USCounter_INIT(){
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+  DWT->CYCCNT = 0;
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
+}
+
+unsigned long getCurrentUS(){
+  return  (unsigned long) DWT->CYCCNT/CLK_freqMHz;
+}
+
+void delayMicroseconds(uint8_t delay){
+  unsigned long start = getCurrentUS();
+  while((getCurrentUS() - start) < delay);
 }
