@@ -90,13 +90,13 @@ int main(){
   //TM_SERVO_Init(&srv, TIM2, TM_PWM_Channel_1, TM_PWM_PinsPack_2);
  
   #ifdef UTR1
-    triggerMeasure(trigPin1, echoPin1, startCount(&startTime1, echoPin1, stopCount(startTime1, &distance1, echoPin1)));
+    triggerMeasure(trigPin1, echoPin1);
   #endif
   #ifdef UTR2
-    triggerMeasure();
+    triggerMeasure(trigPin2, echoPin2);
   #endif
   #ifdef UTR3
-    triggerMeasure();
+    triggerMeasure(trigPin3, echoPin3);
   #endif
 
   // Update SystemCoreClock variable
@@ -187,7 +187,7 @@ int8_t readRFID(){
 	}
 }
 
-void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)()){
+void triggerMeasure(int8_t trig_pin, int8_t echo_pin){
     // Clears the trigPin
     //digitalWrite(trig_pin, GPIO_PIN_RESET);
     HAL_GPIO_WritePin(GPIOA, trig_pin, GPIO_PIN_RESET);
@@ -197,23 +197,27 @@ void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedu
     delayMicroseconds(10);
 
     HAL_GPIO_WritePin(GPIOA, trig_pin, GPIO_PIN_RESET);
-    attachInterrupt(echo_pin, start_count_procedure, TRIGGER_RISING);
+    //attachInterrupt(echo_pin, start_count_procedure, TRIGGER_RISING);
+    HAL_GPIO_EXTI_IRQHandler(echo_pin); //RISING 
+    HAL_GPIO_EXTI_IRQHandler(echo_pin); //FALLING
 }
 
+/*
 void startCount(volatile unsigned long *startTime, int8_t echo_pin,void (*stop_count_procedure)()){
     *startTime = getCurrentUS();
-    attachInterrupt(echo_pin, stop_count_procedure, TRIGGER_FALLING);
+    //attachInterrupt(echo_pin, stop_count_procedure, TRIGGER_FALLING);
 }
 
 void stopCount(volatile unsigned long startTime, volatile float *distance,int8_t echo_pin){
     unsigned long durationMicros = startTime - getCurrentUS();
     //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
     *distance = durationMicros*0.1715;
-    /*if(!(*distance>=230 && *distance<=4000)){
-      *distance=-1;
-    }*/
-    detachInterrupt(echo_pin);    
+    //if(!(*distance>=230 && *distance<=4000)){
+    //  *distance=-1;
+    //}
+    //detachInterrupt(echo_pin);   s    
 }
+*/
 
 void myGPIO_INIT(){
 
@@ -237,3 +241,41 @@ void delayMicroseconds(uint8_t delay){
   unsigned long start = getCurrentUS();
   while((getCurrentUS() - start) < delay);
 }
+
+/* USER CODE BEGIN 4 */
+//This function is called automatically by interrupt controller
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  switch (GPIO_Pin)
+  {
+  case echoPin1:
+    //read state of PIN
+    if(HAL_GPIO_ReadPin(GPIOA, GPIO_Pin) == RESET){  //low state
+      unsigned long durationMicros = startTime1 - getCurrentUS();
+      //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
+      distance1 = durationMicros*0.1715;
+    }else if(HAL_GPIO_ReadPin(GPIOA, GPIO_Pin)== SET){ //high state
+      startTime1 = getCurrentUS();
+    } 
+    break;
+  case echoPin2:
+    if(HAL_GPIO_ReadPin(GPIOA, GPIO_Pin) == RESET){  //low state
+      unsigned long durationMicros = startTime2 - getCurrentUS();
+      //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
+      distance2 = durationMicros*0.1715;
+    }else if(HAL_GPIO_ReadPin(GPIOA, GPIO_Pin)== SET){ //high state
+      startTime2 = getCurrentUS();
+    } 
+    break;
+  case echoPin3:
+    if(HAL_GPIO_ReadPin(GPIOA, GPIO_Pin) == RESET){  //low state
+      unsigned long durationMicros = startTime3 - getCurrentUS();
+      //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
+      distance3 = durationMicros*0.1715;
+    }else if(HAL_GPIO_ReadPin(GPIOA, GPIO_Pin)== SET){ //high state
+      startTime3 = getCurrentUS();
+    } 
+    break;
+  }	
+}
+/* USER CODE END 4 */
