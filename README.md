@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# PST_FlightControl
-Electronic flight control system for the moth class sailboat developed by Polito Sailing Team
-=======
 <div id="top"></div>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
