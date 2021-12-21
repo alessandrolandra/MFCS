@@ -17,7 +17,6 @@ int count2 = 0;  //card      counter
 int set = 0;
 
 void setup() {
-  pinMode(2, OUTPUT);
   Serial.begin(9600);
   SPI.begin();  //enable SPI
   mfrc522.PCD_Init();    // Initialize MFRC522 Hardware
@@ -55,11 +54,8 @@ void loop() {
   }
 
   for (byte i = 0; i < mfrc522.uid.size; i++) {
-    //Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-    //Serial.print(mfrc522.uid.uidByte[i], HEX);
-    digitalWrite(2, HIGH);
-    delay(300);
-    digitalWrite(2, LOW);
+    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+    Serial.print(mfrc522.uid.uidByte[i], HEX);
   }
 
   //compare with id1 or id2
