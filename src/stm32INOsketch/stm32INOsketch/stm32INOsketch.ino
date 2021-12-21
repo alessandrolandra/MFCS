@@ -2,8 +2,11 @@
 
 #include <PID_v1.h>
 #include <Servo.h>
+#include <SPI.h>
+#include <MFRC522.h>
 
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
+#define MFRC_PRESCALER 2; //counter value to read MFRC only 1@s
 
 #define UTR1 //comment if ultrasonic sensor 1 is not present
 #define trigPin1  33
@@ -18,21 +21,31 @@
 #define SERVO //comment if servo is not present
 #define servoPin 12
 
+#define MFRC_SDA 10 // SS on the board
+#define MFRC_RST 9
+
+MFRC522 mfrc522(MFRC_SDA, MFRC_RST);
+
 //aggressive PID parameters
 double aggKi=0.2,aggKp=4,aggKd=1;
 //conservative PID parameters
 double consKi=0.05,consKp=1,consKd=0.25;
 
-void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)());
+double targetHeights[3]={700,850,1000};//target heights in mm
+double sensThresholds[3]={575,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
+double targetHeight=targetHeights[0];
+uint16_t sensThreshold=sensThresholds[0];
 
-double target=800;//target height in mm
 double measuredHeight, rotationAngle;//PID input and output
 
 volatile unsigned long startT1,startT2,startT3;
 volatile float distance1=0,distance2=0,distance3=0;
 
+const byte heightId[4] = {9,133,241,194};  //TARGET HEIGHT TAG
+const byte sensId[4] = {20,110,103,43};  //TARGET SENS   TAG
+
 Servo srv;
-PID myPID(&measuredHeight, &rotationAngle, &target, consKp, consKi, consKd, DIRECT);
+PID myPID(&measuredHeight, &rotationAngle, &targetHeight, consKp, consKi, consKd, DIRECT);
 
 void setup() {
     Serial.begin(115200);
@@ -49,6 +62,9 @@ void setup() {
       pinMode(trigPin3, OUTPUT);  
       pinMode(echoPin3, INPUT);
     #endif
+
+    SPI.begin();  //enable SPI
+    mfrc522.PCD_Init();    // Initialize MFRC522 Hardware
     
     #ifdef DEB
       Serial.println("SETUP DONE");
@@ -74,6 +90,7 @@ void setup() {
     
 void loop() {
     static uint32_t timer=0;
+    static uint8_t mfrcCounter=0,heightCfgCounter=0,sensCfgCounter=0;
     static double gap;
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
       timer = millis();//reset the timer
@@ -96,8 +113,8 @@ void loop() {
       measuredHeight = (((distance2+distance3)/2)+distance1)/2;
       Serial.print("height: ");
       Serial.println(measuredHeight);
-      gap = abs(target-measuredHeight);//distance away from target
-      if (gap < 50){//close to target, use conservative tuning parameters
+      gap = abs(targetHeight-measuredHeight);//distance away from target
+      if (gap < sensThreshold){//close to target, use conservative tuning parameters
           myPID.SetTunings(consKp, consKi, consKd);
       }else{//far from target, use aggressive tuning parameters
           myPID.SetTunings(aggKp, aggKi, aggKd);
@@ -106,6 +123,15 @@ void loop() {
       #ifdef SERVO        
         srv.write(rotationAngle);
       #endif
+
+      mfrcCounter++;
+      if(mfrcCounter == 2){
+        if(!readMFRC(&heightCfgCounter,&sensCfgCounter)){
+          heightCfgCounter=0;
+          sensCfgCounter=0;
+        }
+        mfrcCounter=0;
+      }      
     }
 }
 
@@ -163,5 +189,30 @@ void stopCount3(){
 }
 
 void init_servo(){
-   srv.attach(servoPin); 
+    srv.attach(servoPin); 
+}
+
+int readMFRC(uint8_t *heightCfgCounter,uint8_t *sensCfgCounter){
+    // Look for new cards
+    if (mfrc522.PICC_IsNewCardPresent()){
+        // Select one of the cards
+        if (mfrc522.PICC_ReadCardSerial()){
+          checkCardTag(heightCfgCounter,sensCfgCounter);
+          return 1;
+        }
+    }
+    return 0;
+}
+void checkCardTag(uint8_t *heightCfgCounter,uint8_t *sensCfgCounter){
+    if(memcmp(mfrc522.uid.uidByte,heightId,sizeof(heightId))==0){
+        if(*heightCfgCounter<3){
+          *heightCfgCounter++;
+          targetHeight=targetHeights[*heightCfgCounter];
+        }
+    }else if(memcmp(mfrc522.uid.uidByte,sensId,sizeof(sensId))==0){
+        if(*sensCfgCounter<3){
+          *sensCfgCounter++;
+          sensThreshold=sensThresholds[*sensCfgCounter];
+        }
+    }
 }
