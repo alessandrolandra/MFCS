@@ -1,30 +1,69 @@
 #define DEB
+//#define ESP32 //uncomment to use ESP32
 
 #include <PID_v1.h>
 #include <Servo.h>
 #include <SPI.h>
 #include <MFRC522.h>
+#include <Adafruit_BNO08x.h>
 
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
-#define MFRC_PRESCALER 2; //counter value to read MFRC only 1@s
 
 #define UTR1 //comment if ultrasonic sensor 1 is not present
-#define trigPin1  33
-#define echoPin1  32
-#define UTR2 //comment if ultrasonic sensor 2 is not present
-#define trigPin2  25
-#define echoPin2  26
-#define UTR3 //comment if ultrasonic sensor 3 is not present
-#define trigPin3  27
-#define echoPin3  14
+#ifdef ESP32
+  #define trigPin1  12
+  #define echoPin1  13
+#else
+  #define trigPin1  PA_2
+  #define echoPin1  PA_3
+#endif
+//#define UTR2 //comment if ultrasonic sensor 2 is not present
+#ifdef ESP32
+  #define trigPin2  14
+  #define echoPin2  27
+#else
+  #define trigPin2  PB_3
+  #define echoPin2  PB_5
+#endif
+//#define UTR3 //comment if ultrasonic sensor 3 is not present
+#ifdef ESP32
+  #define trigPin3  26
+  #define echoPin3  25
+#else
+  #define trigPin3  PB_4
+  #define echoPin3  PB_10
+#endif
 
-#define SERVO //comment if servo is not present
-#define servoPin 12
 
-#define MFRC_SDA 10 // SS on the board
-#define MFRC_RST 9
+//#define SERVO //comment if servo is not present
+#ifdef ESP32
+  #define servoPin 12
+#else
+  #define servoPin PA_8
+#endif
 
-MFRC522 mfrc522(MFRC_SDA, MFRC_RST);
+#ifdef ESP32
+  #define MFRC_SS 10
+  #define MFRC_RST 9
+#else
+  #define MFRC_SS PA_6
+  #define MFRC_RST PA_7
+#endif
+
+/*
+ * MFRC ESP32 pinout
+ * SS  10
+ * RST 9
+ * SDA 21  
+ * SCL 22
+ * 
+ * MFRC STM32 pinout
+ * SS  PA_6
+ * RST PA_7
+ * SDA PB_9  
+ * SCL PB_8
+*/
+MFRC522 mfrc522(MFRC_SS, MFRC_RST);
 
 //aggressive PID parameters
 double aggKi=0.2,aggKp=4,aggKd=1;
