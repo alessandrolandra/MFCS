@@ -129,29 +129,29 @@ void setup() {
     
 void loop() {
     static uint32_t timer=0;
-    static uint8_t mfrcCounter=0,heightCfgCounter=0,sensCfgCounter=0;
+    static uint8_t heightCfgCounter=0,sensCfgCounter=0, noCard=0, resetFlagSense=0, resetFlagHeight=0;
     static double gap;
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
       timer = millis();//reset the timer
 
       #ifdef UTR1
-        Serial.print("distance1: ");
-        Serial.println(distance1);
+        //Serial.print("distance1: ");
+        //Serial.println(distance1);
         triggerMeasure1();
       #endif
       #ifdef UTR2
-        Serial.print("distance2: ");
-        Serial.println(distance2);
+        //Serial.print("distance2: ");
+        //Serial.println(distance2);
         triggerMeasure2();
       #endif
       #ifdef UTR3
-        Serial.print("distance3: ");
-        Serial.println(distance3);
+        //Serial.print("distance3: ");
+        //Serial.println(distance3);
         triggerMeasure3();
       #endif
       measuredHeight = (((distance2+distance3)/2)+distance1)/2;
-      Serial.print("height: ");
-      Serial.println(measuredHeight);
+      //Serial.print("height: ");
+      //Serial.println(measuredHeight);
       gap = abs(targetHeight-measuredHeight);//distance away from target
       if (gap < sensThreshold){//close to target, use conservative tuning parameters
           myPID.SetTunings(consKp, consKi, consKd);
@@ -163,14 +163,15 @@ void loop() {
         srv.write(rotationAngle);
       #endif
 
-      mfrcCounter++;
-      if(mfrcCounter == 2){
-        if(!readMFRC(&heightCfgCounter,&sensCfgCounter)){
-          heightCfgCounter=0;
-          sensCfgCounter=0;
-        }
-        mfrcCounter=0;
-      }      
+      readMFRC(&heightCfgCounter,&sensCfgCounter, &noCard, &resetFlagSense, &resetFlagHeight);
+      if(noCard == 32){
+          #ifdef DEB
+            Serial.println("No card present");
+          #endif
+          resetFlagSense = 1;
+          resetFlagHeight = 1;
+          noCard = 0;
+        }      
     }
 }
 
@@ -231,26 +232,38 @@ void init_servo(){
     srv.attach(servoPin); 
 }
 
-int readMFRC(uint8_t *heightCfgCounter,uint8_t *sensCfgCounter){
-    // Look for new cards
-    if (mfrc522.PICC_IsNewCardPresent()){
-        // Select one of the cards
-        if (mfrc522.PICC_ReadCardSerial()){
-          checkCardTag(heightCfgCounter,sensCfgCounter);
-          return 1;
-        }
+void readMFRC(uint8_t *heightCfgCounter,uint8_t *sensCfgCounter, uint8_t *noCard, uint8_t *resetFlagSense, uint8_t *resetFlagHeight){
+   // Select one of the cards
+    mfrc522.PICC_IsNewCardPresent();
+    if (mfrc522.PICC_ReadCardSerial()){
+      checkCardTag(heightCfgCounter,sensCfgCounter, resetFlagSense, resetFlagHeight);
+    }else{
+      (*noCard)++;
     }
-    return 0;
 }
-void checkCardTag(uint8_t *heightCfgCounter,uint8_t *sensCfgCounter){
+void checkCardTag(uint8_t *heightCfgCounter,uint8_t *sensCfgCounter, uint8_t *resetFlagSense, uint8_t *resetFlagHeight){
     if(memcmp(mfrc522.uid.uidByte,heightId,sizeof(heightId))==0){
+        if(*resetFlagHeight){
+          *heightCfgCounter = 0;
+          *resetFlagHeight = 0;
+        }
+        Serial.println("Height card detected");
+        Serial.print("Height counter: ");
+        Serial.println(*heightCfgCounter);
         if(*heightCfgCounter<3){
-          *heightCfgCounter++;
+          (*heightCfgCounter)++;
           targetHeight=targetHeights[*heightCfgCounter];
         }
     }else if(memcmp(mfrc522.uid.uidByte,sensId,sizeof(sensId))==0){
+        if(*resetFlagSense){
+          *sensCfgCounter = 0;
+          *resetFlagSense = 0;
+        }
+        Serial.println("Sense card detected");
+        Serial.print("Sense counter: ");
+        Serial.println(*sensCfgCounter);
         if(*sensCfgCounter<3){
-          *sensCfgCounter++;
+          (*sensCfgCounter)++;
           sensThreshold=sensThresholds[*sensCfgCounter];
         }
     }
