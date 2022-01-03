@@ -1,6 +1,23 @@
 #define DEB
-//#define ESP32 //uncomment to use ESP32
-#define UTR1 //comment if ultrasonic sensor 1 is not present
+#define ESP32 //uncomment to use ESP32
+/**
+ * UTR 1 is the ultrasonic sensor positioned at the bow (prua)
+ * UTR 2 is at stern (poppa), to the LEFT
+ * UTR 3 is at stern (poppa), to the RIGHT
+ * Below the real mounting distances from the BNO and the offsets to be subtracted from UTRs to consider every sensor on the same plain are reported (both in mm)
+ */
+
+#define UTR1_BNO_DISTANCE 750
+#define UTR2_BNO_DISTANCE_X 750
+#define UTR2_BNO_DISTANCE_Y 750
+#define UTR3_BNO_DISTANCE_X 750
+#define UTR3_BNO_DISTANCE_Y 750
+
+#define UTR1_OFFSET_HEIGHT 20
+#define UTR2_OFFSET_HEIGHT 150
+#define UTR3_OFFSET_HEIGHT 150
+ 
+//#define UTR1 //comment if ultrasonic sensor 1 is not present
 //#define UTR2 //comment if ultrasonic sensor 2 is not present
 //#define UTR3 //comment if ultrasonic sensor 3 is not present
 //#define SERVO //comment if servo is not present
@@ -20,37 +37,23 @@
 #ifdef ESP32
   #define trigPin1  12
   #define echoPin1  13
+  #define trigPin2  14
+  #define echoPin2  27
+  #define trigPin3  26
+  #define echoPin3  25
+  #define servoPin  12
+  #define MFRC_SS   10
+  #define MFRC_RST  9
 #else
   #define trigPin1  PA_0
   #define echoPin1  PA_1
-#endif
-#ifdef ESP32
-  #define trigPin2  14
-  #define echoPin2  27
-#else
   #define trigPin2  PA_2
   #define echoPin2  PA_3
-#endif
-#ifdef ESP32
-  #define trigPin3  26
-  #define echoPin3  25
-#else
   #define trigPin3  PB_4
   #define echoPin3  PB_5
-#endif
-
-#ifdef ESP32
-  #define servoPin 12
-#else
-  #define servoPin PA_8
-#endif
-
-#ifdef ESP32
-  #define MFRC_SS 10
-  #define MFRC_RST 9
-#else
-  #define MFRC_SS PA_6
-  #define MFRC_RST PA_7
+  #define servoPin  PA_8
+  #define MFRC_SS   PA_6
+  #define MFRC_RST  PA_7
 #endif
 
 /*
@@ -106,6 +109,12 @@ const byte sensId[4] = {20,110,103,43};  //TARGET SENS TAG
 #endif
 
 PID myPID(&measuredHeight, &rotationAngle, &targetHeight, consKp, consKi, consKd, DIRECT);
+
+struct euler_t {
+  float yaw;
+  float pitch;
+  float roll;
+} ypr;
 
 void setup() {
     Serial.begin(115200);
@@ -196,14 +205,18 @@ void loop() {
           #endif
           return;
         }
-        if(sensorValue.sensorId == SH2_ROTATION_VECTOR){
-          readRotation(sensorValue.un.rotationVector);
+        if(sensorValue.sensorId == SH2_ARVR_STABILIZED_RV){
+          quaternionToEuler(sensorValue.un.arvrStabilizedRV, &ypr);
+          measuredHeight = measureHeight(ypr,distance1,distance2,distance3);
         }
+      #else
+        measuredHeight = (((distance2+distance3)/2)+distance1)/2;
+      #endif
+      #ifdef DEB
+        Serial.print("measuredHeight: ");
+        Serial.println(measuredHeight);
       #endif
       
-      measuredHeight = (((distance2+distance3)/2)+distance1)/2;
-      //Serial.print("height: ");
-      //Serial.println(measuredHeight);
       gap = abs(targetHeight-measuredHeight);//distance away from target
       if (gap < sensThreshold){//close to target, use conservative tuning parameters
           myPID.SetTunings(consKp, consKi, consKd);
@@ -263,23 +276,23 @@ void startCount3(){
     startCount(&startT3,echoPin3,stopCount3);
 }
 
-void stopCount(volatile int64_t start_time,volatile float *distance,int8_t echo_pin){
+void stopCount(volatile int64_t start_time,volatile float *distance,int8_t echo_pin,float offset_height){
     unsigned long durationMicros = micros()-start_time;
     //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
-    *distance = durationMicros*0.1715;
+    *distance = durationMicros*0.1715 - offset_height;
     /*if(!(*distance>=230 && *distance<=4000)){
       *distance=-1;
     }*/
     detachInterrupt(echo_pin);    
 }
 void stopCount1(){
-    stopCount(startT1,&distance1,echoPin1);
+    stopCount(startT1,&distance1,echoPin1,UTR1_OFFSET_HEIGHT);
 }
 void stopCount2(){
-    stopCount(startT2,&distance2,echoPin2);
+    stopCount(startT2,&distance2,echoPin2,UTR2_OFFSET_HEIGHT);
 }
 void stopCount3(){
-    stopCount(startT3,&distance3,echoPin3);
+    stopCount(startT3,&distance3,echoPin3,UTR3_OFFSET_HEIGHT);
 }
 
 #ifdef SERVO
@@ -356,20 +369,41 @@ void stopCount3(){
    * Tell what to capture
    */
   void enableReports() {
-    bno085.enableReport(SH2_ROTATION_VECTOR);
-    // bno085.enableReport(SH2_GYROSCOPE_CALIBRATED);
+    bno085.enableReport(SH2_ARVR_STABILIZED_RV);
   }
-  void readRotation(sh2_RotationVectorWAcc &rot) {
+  float measureHeight(euler_t ypr,float d1,float d2,float d3) {
+    float pitchOffsetBow,pitchOffsetStern2,pitchOffsetStern3,rollOffset2,rollOffset3,dd1,dd2,dd3;
     #ifdef DEB
-      Serial.print("Rotation - real: ");
-      Serial.print(rot.real);
-      Serial.print(" i: ");
-      Serial.print(rot.i);
-      Serial.print(" j: ");
-      Serial.print(rot.j);
-      Serial.print(" k: ");
-      Serial.println(rot.k);
+      Serial.print("yaw: ");
+      Serial.print(ypr.yaw);
+      Serial.print(" pitch: ");
+      Serial.print(ypr.pitch);
+      Serial.print(" roll: ");
+      Serial.print(ypr.roll);
     #endif
-    //TODO: use IMU data
+    pitchOffsetBow = UTR1_BNO_DISTANCE * tan(ypr.pitch);
+    pitchOffsetStern2 = UTR2_BNO_DISTANCE_Y * tan(ypr.pitch);
+    pitchOffsetStern3 = UTR3_BNO_DISTANCE_Y * tan(ypr.pitch);
+    rollOffset2 = UTR2_BNO_DISTANCE_X * tan(ypr.roll);
+    rollOffset3 = UTR3_BNO_DISTANCE_X * tan(ypr.roll);
+    dd1 = d1 - pitchOffsetBow;
+    dd2 = d2 + pitchOffsetStern2 + rollOffset2;
+    dd3 = d3 + pitchOffsetStern2 - rollOffset3;
+    return (((dd2+dd3)/2)+dd1)/2;
+  }
+  void quaternionToEuler(sh2_RotationVectorWAcc_t rotational_vector, euler_t* ypr) {
+    float qr = rotational_vector.real;
+    float qi = rotational_vector.i;
+    float qj = rotational_vector.j;
+    float qk = rotational_vector.k;
+    
+    float sqr = sq(qr);
+    float sqi = sq(qi);
+    float sqj = sq(qj);
+    float sqk = sq(qk);
+
+    ypr->yaw = atan2(2.0 * (qi * qj + qk * qr), (sqi - sqj - sqk + sqr));
+    ypr->pitch = asin(-2.0 * (qi * qk - qj * qr) / (sqi + sqj + sqk + sqr));
+    ypr->roll = atan2(2.0 * (qj * qk + qi * qr), (-sqi - sqj + sqk + sqr));
   }
 #endif
