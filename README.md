@@ -108,6 +108,9 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 Here's a Short description of what is the focus of your application.
 
+Offset explanations:
+![Schematic](images/boatScheme.jpg)
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
