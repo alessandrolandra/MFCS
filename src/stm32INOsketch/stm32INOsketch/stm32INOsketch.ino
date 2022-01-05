@@ -1,5 +1,5 @@
 #define DEB
-#define ESP32 //uncomment to use ESP32
+//#define ESP32 //uncomment to use ESP32
 /**
  * UTR 1 is the ultrasonic sensor positioned at the bow (prua)
  * UTR 2 is at stern (poppa), to the LEFT
@@ -79,7 +79,7 @@ double aggKi=0.2,aggKp=4,aggKd=1;
 double consKi=0.05,consKp=1,consKd=0.25;
 
 double targetHeights[3]={700,850,1000};//target heights in mm
-double sensThresholds[3]={575,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
+double sensThresholds[3]={50,75,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
 double targetHeight=targetHeights[0];
 uint16_t sensThreshold=sensThresholds[0];
 
