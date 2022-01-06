@@ -379,17 +379,20 @@ void stopCount3(){
       Serial.print(" pitch: ");
       Serial.print(ypr.pitch);
       Serial.print(" roll: ");
-      Serial.print(ypr.roll);
+      Serial.println(ypr.roll);
     #endif
+    /* roll is positive around x clockwise
+       pitch is positive around y clockwise */
     pitchOffsetBow = UTR1_BNO_DISTANCE * tan(ypr.pitch);
     pitchOffsetStern2 = UTR2_BNO_DISTANCE_Y * tan(ypr.pitch);
     pitchOffsetStern3 = UTR3_BNO_DISTANCE_Y * tan(ypr.pitch);
     rollOffset2 = UTR2_BNO_DISTANCE_X * tan(ypr.roll);
     rollOffset3 = UTR3_BNO_DISTANCE_X * tan(ypr.roll);
-    dd1 = d1 - pitchOffsetBow;
-    dd2 = d2 + pitchOffsetStern2 + rollOffset2;
-    dd3 = d3 + pitchOffsetStern2 - rollOffset3;
-    return (((dd2+dd3)/2)+dd1)/2;
+    dd1 = d1 + pitchOffsetBow;
+    dd2 = d2 - pitchOffsetStern2 - rollOffset2;
+    dd3 = d3 - pitchOffsetStern3 + rollOffset3;
+    //return (((dd2+dd3)/2)+dd1)/2;... maybe just the average is better, see below
+    return (dd1+dd2+dd3)/3;
   }
   void quaternionToEuler(sh2_RotationVectorWAcc_t rotational_vector, euler_t* ypr) {
     float qr = rotational_vector.real;
