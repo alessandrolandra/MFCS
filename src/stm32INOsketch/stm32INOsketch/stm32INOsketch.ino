@@ -22,15 +22,17 @@
 //#define UTR3 //comment if ultrasonic sensor 3 is not present
 //#define SERVO //comment if servo is not present
 //#define MFRC //comment if MFRC is not present
-#define BNO //comment if BNO is not present
+//#define BNO //comment if BNO is not present
+#define WATCHDOG  //comment if WATCHDOG is not present
 
 #include <PID_v1.h>
 #ifndef ESP32
   #include <Servo.h>
 #endif
 #include <SPI.h>
-#include <MFRC522.h>
-#include <Adafruit_BNO08x.h>
+//#include <MFRC522.h>
+//#include <Adafruit_BNO08x.h>
+#include <IWatchdog.h>
 
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
 
@@ -161,13 +163,21 @@ void setup() {
     #ifdef UTR3
       triggerMeasure3();
     #endif    
+
+    #ifdef WATCHDOG
+      IWatchdog.begin(5000000); // Initialize the IWDG with 5 seconds timeout.
+      //When the timer reaches zero the hardware block would generate a reset signal for the CPU
+    #endif
 }
     
 void loop() {
     static uint32_t timer=0;
     static uint8_t heightCfgCounter=0,sensCfgCounter=0, noCard=0, resetFlagSense=0, resetFlagHeight=0;
     static double gap;
-    static sh2_SensorValue_t sensorValue;
+    //static sh2_SensorValue_t sensorValue;
+    #ifdef DEB
+	    uint32_t wdTimeout; 
+    #endif
     
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
       timer = millis();//reset the timer
@@ -238,6 +248,26 @@ void loop() {
           resetFlagHeight = 1;
           noCard = 0;
         }
+      #endif
+
+      #ifdef WATCHDOG
+        #ifdef DEB
+          if (IWatchdog.isEnabled()){   //returns status of the IWDG block
+            Serial.println("Watchdog works");
+            IWatchdog.get(&wdTimeout, NULL);
+            Serial.print("Watchdog timeout: ");
+            Serial.println(wdTimeout);
+          }else{
+            Serial.println("Watchdog doesn't work");
+          }
+        #endif
+        if (IWatchdog.isReset()){  //returns if the system has resumed from IWDG reset.
+            #ifdef DEB
+              Serial.println("System has resumed");
+            #endif
+            IWatchdog.clearReset(); 
+          }
+        IWatchdog.reload();  // reloads the counter value every time
       #endif
     }
 }
