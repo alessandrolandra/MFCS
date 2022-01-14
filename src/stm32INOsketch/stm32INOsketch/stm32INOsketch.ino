@@ -24,6 +24,7 @@
 #define MFRC //comment if MFRC is not present
 //#define BNO //comment if BNO is not present
 //#define WATCHDOG  //comment if WATCHDOG is not present
+#define BUZZ
 
 #include <PID_v1.h>
 #ifndef ESP32
@@ -31,10 +32,22 @@
 #endif
 #include <SPI.h>
 #include <MFRC522.h>
-#include <Adafruit_BNO08x.h>
+//#include <Adafruit_BNO08x.h>
 #include <IWatchdog.h>
 
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
+
+#ifdef BUZZ
+  #define BUZZER_PIN PC7 
+  #define NOTE_C5  523
+  #define NOTE_D5  587
+  #define NOTE_E5  659
+  #define NOTE_F5  698
+  #define NOTE_G5  784
+  #define NOTE_A5  880
+  #define NOTE_B5  988
+  #define NOTE_C6  1047
+#endif
 
 #ifdef ESP32
   #define trigPin1  12
@@ -90,6 +103,9 @@ volatile float distance1=0,distance2=0,distance3=0;
 
 const byte heightId[4] = {9,133,241,194};  //TARGET HEIGHT TAG
 const byte sensId[4] = {20,110,103,43};  //TARGET SENS TAG
+
+unsigned int soundVect[] = {NOTE_C5, NOTE_G5, NOTE_C6, NOTE_F5, NOTE_G5, NOTE_A5, NOTE_B5};
+unsigned int soundDuration = 125;  //note duration in milliseconds
 
 #ifdef SERVO
   Servo srv;
@@ -167,13 +183,18 @@ void setup() {
       IWatchdog.begin(5000000); // Initialize the IWDG with 5 seconds timeout.
       //When the timer reaches zero the hardware block would generate a reset signal for the CPU
     #endif
+
+    #ifdef BUZZ
+      pinMode(BUZZER_PIN, OUTPUT);
+    #endif
 }
     
 void loop() {
     static uint32_t timer=0;
     static uint8_t heightCfgCounter=0,sensCfgCounter=0, noCard=0, resetFlagSense=0, resetFlagHeight=0;
     static double gap;
-    static sh2_SensorValue_t sensorValue;
+    static uint8_t sCnt1=0;
+//    static sh2_SensorValue_t sensorValue;
     #ifdef WATCHDOG
 	    uint32_t wdTimeout; 
     #endif
@@ -268,6 +289,15 @@ void loop() {
           }
         IWatchdog.reload();  // reloads the counter value every time
       #endif
+      
+      #ifdef BUZZ
+    	  if(heightCfgCounter>0 && resetFlagHeight == 0 && noCard%2!= 0){
+      	  tone(BUZZER_PIN, soundVect[heightCfgCounter-1], soundDuration);
+    	  }
+    	  if(sensCfgCounter>0 && resetFlagSense == 0 && noCard%2!= 0){
+      	  tone(BUZZER_PIN, soundVect[sensCfgCounter+3], soundDuration);
+    	  }    
+     #endif
     }
 }
 
