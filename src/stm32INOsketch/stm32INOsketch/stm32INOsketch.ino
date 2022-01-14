@@ -7,11 +7,11 @@
  * Below the real mounting distances from the BNO and the offsets to be subtracted from UTRs to consider every sensor on the same plain are reported (both in mm)
  */
 
-#define UTR1_BNO_DISTANCE 750
-#define UTR2_BNO_DISTANCE_X 750
-#define UTR2_BNO_DISTANCE_Y 750
-#define UTR3_BNO_DISTANCE_X 750
-#define UTR3_BNO_DISTANCE_Y 750
+#define UTR1_BNO_DISTANCE 400
+#define UTR2_BNO_DISTANCE_X 380
+#define UTR2_BNO_DISTANCE_Y 105
+#define UTR3_BNO_DISTANCE_X 380
+#define UTR3_BNO_DISTANCE_Y 175
 
 #define UTR1_OFFSET_HEIGHT -68
 #define UTR2_OFFSET_HEIGHT -61
@@ -22,8 +22,8 @@
 #define UTR3 //comment if ultrasonic sensor 3 is not present
 #define SERVO //comment if servo is not present
 #define MFRC //comment if MFRC is not present
-//#define BNO //comment if BNO is not present
-//#define WATCHDOG  //comment if WATCHDOG is not present
+#define BNO //comment if BNO is not present
+#define WATCHDOG  //comment if WATCHDOG is not present
 #define BUZZ
 
 #include <PID_v1.h>
@@ -32,13 +32,12 @@
 #endif
 #include <SPI.h>
 #include <MFRC522.h>
-//#include <Adafruit_BNO08x.h>
+#include <Adafruit_BNO08x.h>
 #include <IWatchdog.h>
 
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
 
-#ifdef BUZZ
-  #define BUZZER_PIN PC7 
+#ifdef BUZZ  
   #define NOTE_C5  523
   #define NOTE_D5  587
   #define NOTE_E5  659
@@ -59,6 +58,7 @@
   #define servoPin  12
   #define MFRC_SS   10
   #define MFRC_RST  9
+  #define BUZZER_PIN 28
 #else
   #define trigPin1  PA0
   #define echoPin1  PB3
@@ -69,6 +69,7 @@
   #define servoPin  PB10
   #define MFRC_SS   PA8
   #define MFRC_RST  PA9
+  #define BUZZER_PIN PC7
 #endif
 
 /*
@@ -87,7 +88,8 @@
 #endif
 
 //aggressive PID parameters
-double aggKi=0.2,aggKp=4,aggKd=1;
+//double aggKi=0.2,aggKp=4,aggKd=1;
+double aggKi=5,aggKp=2,aggKd=3;
 //conservative PID parameters
 double consKi=0.05,consKp=1,consKd=0.25;
 
@@ -163,7 +165,7 @@ void setup() {
 
     myPID.SetMode(AUTOMATIC);
     //myPID.SetOutputLimits(0, 20);//10-13 degrees down, 8-9 degrees up
-    myPID.SetOutputLimits(0, 180);
+    myPID.SetOutputLimits(0, 60);
 
     #ifdef DEB
       Serial.println("SETUP DONE");
@@ -194,7 +196,7 @@ void loop() {
     static uint8_t heightCfgCounter=0,sensCfgCounter=0, noCard=0, resetFlagSense=0, resetFlagHeight=0;
     static double gap;
     static uint8_t sCnt1=0;
-//    static sh2_SensorValue_t sensorValue;
+    static sh2_SensorValue_t sensorValue;
     #ifdef WATCHDOG
 	    uint32_t wdTimeout; 
     #endif
@@ -233,9 +235,8 @@ void loop() {
             Serial.print("Low accuracy ");
             Serial.print(sensorValue.sensorId, HEX);
           #endif
-          return;
-        }
-        if(sensorValue.sensorId == SH2_ARVR_STABILIZED_RV){
+          measuredHeight = (((distance2+distance3)/2)+distance1)/2;
+        }else if(sensorValue.sensorId == SH2_ARVR_STABILIZED_RV){
           quaternionToEuler(sensorValue.un.arvrStabilizedRV, &ypr);
           measuredHeight = measureHeight(ypr,distance1,distance2,distance3);
         }
@@ -289,6 +290,8 @@ void loop() {
           }
         IWatchdog.reload();  // reloads the counter value every time
       #endif
+
+      //delay(30000);//to test watchdog
       
       #ifdef BUZZ
     	  if(heightCfgCounter>0 && resetFlagHeight == 0 && noCard%2!= 0){
