@@ -13,25 +13,25 @@
 #define UTR3_BNO_DISTANCE_X 750
 #define UTR3_BNO_DISTANCE_Y 750
 
-#define UTR1_OFFSET_HEIGHT 20
-#define UTR2_OFFSET_HEIGHT 150
-#define UTR3_OFFSET_HEIGHT 150
+#define UTR1_OFFSET_HEIGHT -68
+#define UTR2_OFFSET_HEIGHT -61
+#define UTR3_OFFSET_HEIGHT -72
  
-//#define UTR1 //comment if ultrasonic sensor 1 is not present
-//#define UTR2 //comment if ultrasonic sensor 2 is not present
-//#define UTR3 //comment if ultrasonic sensor 3 is not present
-//#define SERVO //comment if servo is not present
-//#define MFRC //comment if MFRC is not present
+#define UTR1 //comment if ultrasonic sensor 1 is not present
+#define UTR2 //comment if ultrasonic sensor 2 is not present
+#define UTR3 //comment if ultrasonic sensor 3 is not present
+#define SERVO //comment if servo is not present
+#define MFRC //comment if MFRC is not present
 //#define BNO //comment if BNO is not present
-#define WATCHDOG  //comment if WATCHDOG is not present
+//#define WATCHDOG  //comment if WATCHDOG is not present
 
 #include <PID_v1.h>
 #ifndef ESP32
   #include <Servo.h>
 #endif
 #include <SPI.h>
-//#include <MFRC522.h>
-//#include <Adafruit_BNO08x.h>
+#include <MFRC522.h>
+#include <Adafruit_BNO08x.h>
 #include <IWatchdog.h>
 
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
@@ -47,15 +47,15 @@
   #define MFRC_SS   10
   #define MFRC_RST  9
 #else
-  #define trigPin1  PA_0
-  #define echoPin1  PA_1
-  #define trigPin2  PA_2
-  #define echoPin2  PA_3
-  #define trigPin3  PB_4
-  #define echoPin3  PB_5
-  #define servoPin  PA_8
-  #define MFRC_SS   PA_6
-  #define MFRC_RST  PA_7
+  #define trigPin1  PA0
+  #define echoPin1  PB3
+  #define trigPin2  PA1
+  #define echoPin2  PB4
+  #define trigPin3  PA4
+  #define echoPin3  PB5
+  #define servoPin  PB10
+  #define MFRC_SS   PA8
+  #define MFRC_RST  PA9
 #endif
 
 /*
@@ -66,10 +66,8 @@
  * SCL 22
  * 
  * MFRC STM32 pinout
- * SS  PA_6
- * RST PA_7
- * SDA PB_9  
- * SCL PB_8
+ * SS  PA8
+ * RST PA9
 */
 #ifdef MFRC
   MFRC522 mfrc522(MFRC_SS, MFRC_RST);
@@ -82,7 +80,7 @@ double consKi=0.05,consKp=1,consKd=0.25;
 
 double targetHeights[3]={700,850,1000};//target heights in mm
 double sensThresholds[3]={50,75,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
-double targetHeight=targetHeights[0];
+double targetHeight=targetHeights[2];
 uint16_t sensThreshold=sensThresholds[0];
 
 double measuredHeight, rotationAngle;//PID input and output
@@ -103,8 +101,8 @@ const byte sensId[4] = {20,110,103,43};  //TARGET SENS TAG
  * SCL 22
  * 
  * BNO STM32 pinout
- * SDA PB_3  
- * SCL PB_10
+ * SDA PB9  
+ * SCL PB8
 */
 #ifdef BNO
   Adafruit_BNO08x bno085(-1); // reset pin not required in I2C
@@ -148,7 +146,8 @@ void setup() {
     #endif
 
     myPID.SetMode(AUTOMATIC);
-    myPID.SetOutputLimits(0, 20);//10-13 degrees down, 8-9 degrees up
+    //myPID.SetOutputLimits(0, 20);//10-13 degrees down, 8-9 degrees up
+    myPID.SetOutputLimits(0, 180);
 
     #ifdef DEB
       Serial.println("SETUP DONE");
@@ -174,8 +173,8 @@ void loop() {
     static uint32_t timer=0;
     static uint8_t heightCfgCounter=0,sensCfgCounter=0, noCard=0, resetFlagSense=0, resetFlagHeight=0;
     static double gap;
-    //static sh2_SensorValue_t sensorValue;
-    #ifdef DEB
+    static sh2_SensorValue_t sensorValue;
+    #ifdef WATCHDOG
 	    uint32_t wdTimeout; 
     #endif
     
@@ -235,7 +234,7 @@ void loop() {
       }
       myPID.Compute();
       #ifdef SERVO        
-        srv.write(rotationAngle);
+        srv.write(rotationAngle);        
       #endif
 
       #ifdef MFRC
