@@ -103,11 +103,23 @@
 
 ### Functional Specification
 
-Here's a Short description of what is the focus of your application.
+This project aims at automatically regulate and control the height of the flight of a <a href="#moth">Moth</a>.<br>
+Commercial products use mechanical elements to change the angle of the flap mounted below the drift, while the one on the rudder is directly regulated by the sailor. Our goal is to avoid the mechanical "measurement" of the height, using both ultrasonic sensors and an <a href="imu">IMU</a>, and automatically derive the right angle the foil must assume according to that.<br>
+In particular, our sensing system is composed of 3 ultrasonic sensors mounted one at the bow, and the other two at stern (poppa), to the left and right extremes of the skiff, and the IMU, that allows us to retrieve the spatial orientation of the boat. Taking into account the pitch and roll angles, we can properly weight the measured distances and find the height of the center of gravity of the boat.<br>
+First of all some offsets have been added to the ultrasonic measures to consider the boat as a flat surface on which the sensor are mounted, independently of the real position of the sensors on the z axis.<br>
+Then, the following offsets have been taken into account to retrieve the impact of the orientation of the boat on each measured data:
 
-Offset explanations:
-![Schematic](images/boatScheme.jpg)
+![Offset explanation](images/boatScheme.jpg)
 
+The output of the system is the angle the flap must assume in order to reach and maintain the TARGET height.<br>
+This has been obtained using two different PIDs, a more aggressive one, to quickly reach the target and a conservative one to maintain smootly the height.
+The change between the two depends on the absolute difference from the target height: if this is above a defined THRESHOLD we are using the first, otherwise we are using the second.<br>
+TARGET and THRESHOLD are then selected by the sailor between 3 different option for each parameter, just by approaching one of the two RFID cards to the reader.
+
+<hr>
+<div id="moth">The Moth is a small sailing boat designed to plane; since 2000 it has become an expensive and largely commercially-produced class of boat designed to hydroplane on foils.</div>
+<div id="imu">IMU stands for Inertial Measurement Unit, and is an electronic device that measures and reports a body's specific force, angular rate and orientation of the body, using a combination of accelerometers, gyroscopes, and sometimes magnetometers.</div>
+<p align="right">(Wikipedia)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
