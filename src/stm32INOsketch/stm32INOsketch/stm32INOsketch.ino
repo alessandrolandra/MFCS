@@ -24,7 +24,8 @@
 #define MFRC //comment if MFRC is not present
 #define BNO //comment if BNO is not present
 #define WATCHDOG  //comment if WATCHDOG is not present
-#define BUZZ
+#define BUZZ //comment if buzzer is not present
+//#define WATCHDOG_TEST //uncomment to TEST the watchdog (WATCHDOG define needed)
 
 #include <PID_v1.h>
 #ifndef ESP32
@@ -35,6 +36,7 @@
 #include <Adafruit_BNO08x.h>
 #include <IWatchdog.h>
 
+//#define SAMPLERATE_DELAY_MS 250 //how often to read data from the board [milliseconds]
 #define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
 
 #ifdef BUZZ  
@@ -67,8 +69,8 @@
   #define trigPin3  PA4
   #define echoPin3  PB5
   #define servoPin  PB10
-  #define MFRC_SS   PA8
-  #define MFRC_RST  PA9
+  #define MFRC_SS   PA8 //D7
+  #define MFRC_RST  PA9 //D8
   #define BUZZER_PIN PC7
 #endif
 
@@ -89,9 +91,12 @@
 
 //aggressive PID parameters
 //double aggKi=0.2,aggKp=4,aggKd=1;
-double aggKi=5,aggKp=2,aggKd=3;
+//double aggKi=5,aggKp=2,aggKd=3;
+//double aggKi=0,aggKp=2,aggKd=0.5;
+double aggKi=0,aggKp=1,aggKd=0.25;
 //conservative PID parameters
-double consKi=0.05,consKp=1,consKd=0.25;
+double consKi=0,consKp=1,consKd=0.25;
+//double consKi=0.05,consKp=1,consKd=0.25;
 
 double targetHeights[3]={700,850,1000};//target heights in mm
 double sensThresholds[3]={50,75,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
@@ -152,7 +157,7 @@ void setup() {
 
     SPI.begin();
     #ifdef MFRC
-      mfrc522.PCD_Init(); 
+      mfrc522.PCD_Init();
     #endif
 
     #ifdef BNO
@@ -164,11 +169,19 @@ void setup() {
     #endif
 
     myPID.SetMode(AUTOMATIC);
-    //myPID.SetOutputLimits(0, 20);//10-13 degrees down, 8-9 degrees up
-    myPID.SetOutputLimits(0, 60);
+    myPID.SetSampleTime(SAMPLERATE_DELAY_MS);
+
+    #ifdef WATCHDOG
+      IWatchdog.begin(5000000); // Initialize the IWDG with 5 seconds timeout.
+      //When the timer reaches zero the hardware block would generate a reset signal for the CPU
+    #endif
+
+    #ifdef BUZZ
+      pinMode(BUZZER_PIN, OUTPUT);      
+    #endif
 
     #ifdef DEB
-      Serial.println("SETUP DONE");
+      Serial.println("SETUP DONE");      
     #endif
 
     #ifdef UTR1
@@ -180,15 +193,6 @@ void setup() {
     #ifdef UTR3
       triggerMeasure3();
     #endif    
-
-    #ifdef WATCHDOG
-      IWatchdog.begin(5000000); // Initialize the IWDG with 5 seconds timeout.
-      //When the timer reaches zero the hardware block would generate a reset signal for the CPU
-    #endif
-
-    #ifdef BUZZ
-      pinMode(BUZZER_PIN, OUTPUT);
-    #endif
 }
     
 void loop() {
@@ -197,9 +201,8 @@ void loop() {
     static double gap;
     static uint8_t sCnt1=0;
     static sh2_SensorValue_t sensorValue;
-    #ifdef WATCHDOG
-	    uint32_t wdTimeout; 
-    #endif
+	  uint32_t wdTimeout;
+   static int8_t firstCalibration=1;
     
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
       timer = millis();//reset the timer
@@ -224,21 +227,25 @@ void loop() {
         if(bno085.wasReset()) {
           enableReports();
         }
-        if(!bno085.getSensorEvent(&sensorValue)) {
+        if(checkCalibration(&sensorValue)==0){
+          if(firstCalibration){
+            #ifdef BUZZ
+              tone(BUZZER_PIN, NOTE_C5, soundDuration);
+            #endif
+            #ifdef DEB
+              Serial.println("CALIBRATION DONE");
+            #endif
+            firstCalibration = !firstCalibration;
+          }
+          if(sensorValue.sensorId == SH2_ARVR_STABILIZED_RV){
+            quaternionToEuler(sensorValue.un.arvrStabilizedRV, &ypr);
+            measuredHeight = measureHeight(ypr,distance1,distance2,distance3);
+          }
+        }else{   
           #ifdef DEB
-            Serial.println("Cannot get sensor event");
-          #endif
-          return;
-        }
-        if(sensorValue.status < 2) {
-          #ifdef DEB
-            Serial.print("Low accuracy ");
-            Serial.print(sensorValue.sensorId, HEX);
+            Serial.println("Low accuracy");
           #endif
           measuredHeight = (((distance2+distance3)/2)+distance1)/2;
-        }else if(sensorValue.sensorId == SH2_ARVR_STABILIZED_RV){
-          quaternionToEuler(sensorValue.un.arvrStabilizedRV, &ypr);
-          measuredHeight = measureHeight(ypr,distance1,distance2,distance3);
         }
       #else
         measuredHeight = (((distance2+distance3)/2)+distance1)/2;
@@ -255,12 +262,17 @@ void loop() {
           myPID.SetTunings(aggKp, aggKi, aggKd);
       }
       myPID.Compute();
-      #ifdef SERVO        
-        srv.write(rotationAngle);        
+      #ifdef SERVO
+        rotationAngle = mapf(rotationAngle, 0, 255, 1000, 1380);
+          #ifdef DEB
+            Serial.print("rotation angle in dutycycle ");
+            Serial.println(rotationAngle);
+          #endif
+        srv.writeMicroseconds(rotationAngle);
       #endif
 
       #ifdef MFRC
-        readMFRC(&heightCfgCounter,&sensCfgCounter, &noCard, &resetFlagSense, &resetFlagHeight);
+        readMFRC(&heightCfgCounter,&sensCfgCounter, &noCard, &resetFlagSense, &resetFlagHeight);        
         if(noCard == 32){
           #ifdef DEB
             Serial.println("No card present");
@@ -268,30 +280,23 @@ void loop() {
           resetFlagSense = 1;
           resetFlagHeight = 1;
           noCard = 0;
-        }
+        }        
       #endif
 
       #ifdef WATCHDOG
-        #ifdef DEB
-          if (IWatchdog.isEnabled()){   //returns status of the IWDG block
-            Serial.println("Watchdog works");
-            IWatchdog.get(&wdTimeout, NULL);
-            Serial.print("Watchdog timeout: ");
-            Serial.println(wdTimeout);
-          }else{
-            Serial.println("Watchdog doesn't work");
-          }
-        #endif
         if (IWatchdog.isReset()){  //returns if the system has resumed from IWDG reset.
             #ifdef DEB
-              Serial.println("System has resumed");
+              Serial.println("System has resumed due to watchdog elapsed");
             #endif
             IWatchdog.clearReset(); 
           }
         IWatchdog.reload();  // reloads the counter value every time
-      #endif
 
-      //delay(30000);//to test watchdog
+        #ifdef WATCHDOG_TEST
+          Serial.println("DELAY 30s");
+          delay(30000);//simulate program stop
+        #endif
+      #endif
       
       #ifdef BUZZ
     	  if(heightCfgCounter>0 && resetFlagHeight == 0 && noCard%2!= 0){
@@ -300,8 +305,21 @@ void loop() {
     	  if(sensCfgCounter>0 && resetFlagSense == 0 && noCard%2!= 0){
       	  tone(BUZZER_PIN, soundVect[sensCfgCounter+3], soundDuration);
     	  }    
-     #endif
+      #endif
     }
+}
+
+int checkCalibration(sh2_SensorValue_t *sensorValue){
+  if(!bno085.getSensorEvent(sensorValue)) {
+      #ifdef DEB
+        Serial.println("Cannot get sensor event");
+      #endif
+      return 1;
+   }
+   if((*sensorValue).status < 2) {
+      return 0;
+   }
+   return 1;
 }
 
 void triggerMeasure(int8_t trig_pin, int8_t echo_pin, void (*start_count_procedure)()){
@@ -359,7 +377,13 @@ void stopCount3(){
 
 #ifdef SERVO
   void init_servo(){    
-      srv.attach(servoPin);
+     srv.attach(servoPin);
+  }
+
+  float mapf(float x, float in_min, float in_max, float out_min, float out_max) {
+     float result;
+     result = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+     return result;
   }
 #endif
 
