@@ -105,16 +105,16 @@
 
 This project aims at automatically regulate and control the height of the flight of a <a href="#moth">Moth</a>.<br>
 Commercial products use mechanical elements to change the angle of the flap mounted below the drift, while the one on the rudder is directly regulated by the sailor. Our goal is to avoid the mechanical "measurement" of the height, using both ultrasonic sensors and an <a href="imu">IMU</a>, and automatically derive the right angle the foil must assume according to that.<br>
-In particular, our sensing system is composed of 3 ultrasonic sensors mounted one at the bow, and the other two at stern (poppa), to the left and right extremes of the skiff, and the IMU, that allows us to retrieve the spatial orientation of the boat. Taking into account the pitch and roll angles, we can properly weight the measured distances and find the height of the center of gravity of the boat.<br>
+In particular, our sensing system is composed of 3 ultrasonic sensors mounted one at the bow, and the other two at stern, to the left and right extremes of the skiff, and the IMU, that allows us to retrieve the spatial orientation of the boat. Taking into account the pitch and roll angles, we can properly weight the measured distances and find the height of the center of gravity of the boat.<br>
 First of all some offsets have been added to the ultrasonic measures to consider the boat as a flat surface on which the sensor are mounted, independently of the real position of the sensors on the z axis.<br>
 Then, the following offsets have been taken into account to retrieve the impact of the orientation of the boat on each measured data:
 
 ![Offset explanation](images/boatScheme.jpg)
 
 The output of the system is the angle the flap must assume in order to reach and maintain the TARGET height.<br>
-This has been obtained using two different PIDs, a more aggressive one, to quickly reach the target and a conservative one to maintain smootly the height.
-The change between the two depends on the absolute difference from the target height: if this is above a defined THRESHOLD we are using the first, otherwise we are using the second.<br>
-TARGET and THRESHOLD are then selected by the sailor between 3 different option for each parameter, just by approaching one of the two RFID cards to the reader.
+This has been obtained using two different PIDs, a more aggressive one, to quickly reach the target, and a conservative one, to smootly maintain the height.
+The change between the two depends on the absolute difference from the target height: if this is above a defined THRESHOLD, we are using the first, otherwise we are using the second.<br>
+TARGET and THRESHOLD are then selected by the sailor between 3 different options for each parameter, just by approaching one of the two RFID cards to the reader.
 
 <hr>
 <div id="moth">The Moth is a small sailing boat designed to plane; since 2000 it has become an expensive and largely commercially-produced class of boat designed to hydroplane on foils.</div>
@@ -124,32 +124,22 @@ TARGET and THRESHOLD are then selected by the sailor between 3 different option 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+STM32F4xx microcontroller
+3 HC-SR04 waterproof ultrasonic sensors
+BNO085 IMU
+MFRC522 RFID reader
+servomotor (torque to be calculated according to flap and skiff dimensions/profile)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/SoC-Arch-polito/mfcs21.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+2. Copy all the libraries contained in <a href="libraries">libraries</a> in your respective Arduino folder
+3. Compile the <a href="src/stm32INOsketch/stm32INOsketch.ino">stm32INOsketch</a> and upload it on the board
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
