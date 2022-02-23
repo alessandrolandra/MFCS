@@ -40,8 +40,6 @@
     <a href="https://github.com/SoC-Arch-polito/mfcs21"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/SoC-Arch-polito/mfcs21">View Demo</a>
-    ·
     <a href="https://github.com/SoC-Arch-polito/mfcs21/issues">Report Bug</a>
     ·
     <a href="https://github.com/SoC-Arch-polito/mfcs21/issues">Request Feature</a>
@@ -89,14 +87,8 @@
 
 ### Built With
 
-* [Next.js](https://nextjs.org/)
-* [React.js](https://reactjs.org/)
-* [Vue.js](https://vuejs.org/)
-* [Angular](https://angular.io/)
-* [Svelte](https://svelte.dev/)
-* [Laravel](https://laravel.com)
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [STM32F4xx](https://www.st.com/en/microcontrollers-microprocessors/stm32f4-series.html)
+* [Arduino](https://www.arduino.cc/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -154,22 +146,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
-
-See the [open issues](https://github.com/SoC-Arch-polito/mfcs21/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- CONTRIBUTING -->
 ## Contributing
 
@@ -191,7 +167,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [LICENCE](LICENCE.txt) for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -211,9 +187,7 @@ Project Link: [https://github.com/SoC-Arch-polito/mfcs21](https://github.com/SoC
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [PolitoSailingTeam](https://areeweb.polito.it/politosailingteam/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
