@@ -7,15 +7,15 @@
  * Below the real mounting distances from the BNO and the offsets to be subtracted from UTRs to consider every sensor on the same plain are reported (both in mm)
  */
 
-#define UTR1_BNO_DISTANCE 400
-#define UTR2_BNO_DISTANCE_X 380
-#define UTR2_BNO_DISTANCE_Y 105
-#define UTR3_BNO_DISTANCE_X 380
+#define UTR1_BNO_DISTANCE 515
+#define UTR2_BNO_DISTANCE_X 155
+#define UTR2_BNO_DISTANCE_Y 175
+#define UTR3_BNO_DISTANCE_X 155
 #define UTR3_BNO_DISTANCE_Y 175
 
-#define UTR1_OFFSET_HEIGHT -68
-#define UTR2_OFFSET_HEIGHT -61
-#define UTR3_OFFSET_HEIGHT -72
+#define UTR1_OFFSET_HEIGHT 51
+#define UTR2_OFFSET_HEIGHT 52
+#define UTR3_OFFSET_HEIGHT 52
  
 #define UTR1 //comment if ultrasonic sensor 1 is not present
 #define UTR2 //comment if ultrasonic sensor 2 is not present
@@ -36,8 +36,8 @@
 #include <Adafruit_BNO08x.h>
 #include <IWatchdog.h>
 
-//#define SAMPLERATE_DELAY_MS 250 //how often to read data from the board [milliseconds]
-#define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
+//#define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
+#define SAMPLERATE_DELAY_MS 250 //how often to read data from the board [milliseconds]
 
 #ifdef BUZZ  
   #define NOTE_C5  523
@@ -90,20 +90,16 @@
 #endif
 
 //aggressive PID parameters
-//double aggKi=0.2,aggKp=4,aggKd=1;
-//double aggKi=5,aggKp=2,aggKd=3;
-//double aggKi=0,aggKp=2,aggKd=0.5;
-double aggKi=0,aggKp=1,aggKd=0.25;
+double aggKi=0,aggKp=0.7,aggKd=0.05;
 //conservative PID parameters
-double consKi=0,consKp=1,consKd=0.25;
-//double consKi=0.05,consKp=1,consKd=0.25;
+double consKi=0,consKp=0.5,consKd=0.01;
 
 double targetHeights[3]={700,850,1000};//target heights in mm
 double sensThresholds[3]={50,75,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
-double targetHeight=targetHeights[2];
-uint16_t sensThreshold=sensThresholds[0];
+double targetHeight=targetHeights[1];
+uint16_t sensThreshold=sensThresholds[1];
 
-double measuredHeight, rotationAngle;//PID input and output
+double measuredHeight, rotationDutycycle;//PID input and output
 
 volatile unsigned long startT1,startT2,startT3;
 volatile float distance1=0,distance2=0,distance3=0;
@@ -131,7 +127,7 @@ unsigned int soundDuration = 125;  //note duration in milliseconds
   Adafruit_BNO08x bno085(-1); // reset pin not required in I2C
 #endif
 
-PID myPID(&measuredHeight, &rotationAngle, &targetHeight, consKp, consKi, consKd, DIRECT);
+PID myPID(&measuredHeight, &rotationDutycycle, &targetHeight, aggKp, aggKi, aggKd, DIRECT);
 
 struct euler_t {
   float yaw;
@@ -170,6 +166,7 @@ void setup() {
 
     myPID.SetMode(AUTOMATIC);
     myPID.SetSampleTime(SAMPLERATE_DELAY_MS);
+    myPID.SetOutputLimits(1000, 1380); //constrain to usable crank range
 
     #ifdef WATCHDOG
       IWatchdog.begin(5000000); // Initialize the IWDG with 5 seconds timeout.
@@ -198,11 +195,11 @@ void setup() {
 void loop() {
     static uint32_t timer=0;
     static uint8_t heightCfgCounter=0,sensCfgCounter=0, noCard=0, resetFlagSense=0, resetFlagHeight=0;
-    static double gap;
+    static double error;
     static uint8_t sCnt1=0;
     static sh2_SensorValue_t sensorValue;
 	  uint32_t wdTimeout;
-   static int8_t firstCalibration=1;
+    static int8_t firstCalibration=1;
     
     if (millis() - timer > SAMPLERATE_DELAY_MS) {
       timer = millis();//reset the timer
@@ -243,7 +240,7 @@ void loop() {
           }
         }else{   
           #ifdef DEB
-            Serial.println("Low accuracy");
+            Serial.println("IMU Low accuracy, just UTRs considered");
           #endif
           measuredHeight = (((distance2+distance3)/2)+distance1)/2;
         }
@@ -251,24 +248,23 @@ void loop() {
         measuredHeight = (((distance2+distance3)/2)+distance1)/2;
       #endif
       #ifdef DEB
-        Serial.print("measuredHeight: ");
+        Serial.print("measured height: ");
         Serial.println(measuredHeight);
       #endif
       
-      gap = abs(targetHeight-measuredHeight);//distance away from target
-      if (gap < sensThreshold){//close to target, use conservative tuning parameters
+      error = abs(targetHeight-measuredHeight);//distance away from target
+      if (error < sensThreshold){//close to target, use conservative tuning parameters
           myPID.SetTunings(consKp, consKi, consKd);
       }else{//far from target, use aggressive tuning parameters
           myPID.SetTunings(aggKp, aggKi, aggKd);
       }
       myPID.Compute();
       #ifdef SERVO
-        rotationAngle = mapf(rotationAngle, 0, 255, 1000, 1380);
           #ifdef DEB
-            Serial.print("rotation angle in dutycycle ");
-            Serial.println(rotationAngle);
+            Serial.print("rotation dutycycle ");
+            Serial.println(rotationDutycycle);
           #endif
-        srv.writeMicroseconds(rotationAngle);
+        srv.writeMicroseconds(rotationDutycycle);
       #endif
 
       #ifdef MFRC
@@ -360,9 +356,6 @@ void stopCount(volatile int64_t start_time,volatile float *distance,int8_t echo_
     unsigned long durationMicros = micros()-start_time;
     //the speed of sound, in air, at 20 degrees C is 343m/s... half distance in mm: micros/10^6*343*10^3 /2 = micros*0.1715
     *distance = durationMicros*0.1715 - offset_height;
-    /*if(!(*distance>=230 && *distance<=4000)){
-      *distance=-1;
-    }*/
     detachInterrupt(echo_pin);    
 }
 void stopCount1(){
@@ -378,12 +371,6 @@ void stopCount3(){
 #ifdef SERVO
   void init_servo(){    
      srv.attach(servoPin);
-  }
-
-  float mapf(float x, float in_min, float in_max, float out_min, float out_max) {
-     float result;
-     result = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-     return result;
   }
 #endif
 
@@ -460,9 +447,7 @@ void stopCount3(){
   float measureHeight(euler_t ypr,float d1,float d2,float d3) {
     float pitchOffsetBow,pitchOffsetStern2,pitchOffsetStern3,rollOffset2,rollOffset3,dd1,dd2,dd3;
     #ifdef DEB
-      Serial.print("yaw: ");
-      Serial.print(ypr.yaw);
-      Serial.print(" pitch: ");
+      Serial.print("pitch: ");
       Serial.print(ypr.pitch);
       Serial.print(" roll: ");
       Serial.println(ypr.roll);
@@ -477,7 +462,6 @@ void stopCount3(){
     dd1 = d1 + pitchOffsetBow;
     dd2 = d2 - pitchOffsetStern2 - rollOffset2;
     dd3 = d3 - pitchOffsetStern3 + rollOffset3;
-    //return (((dd2+dd3)/2)+dd1)/2;... maybe just the average is better, see below
     return (dd1+dd2+dd3)/3;
   }
   void quaternionToEuler(sh2_RotationVectorWAcc_t rotational_vector, euler_t* ypr) {
