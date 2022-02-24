@@ -126,6 +126,7 @@ TARGET and THRESHOLD are then selected by the sailor between 3 different options
 <br>
 <br>
 Follow the schematic below to setup the system:
+
 ![schematic](images/schematic.jpg)
 
 ### Installation
