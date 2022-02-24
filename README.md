@@ -123,6 +123,8 @@ STM32F4xx microcontroller
 BNO085 IMU
 MFRC522 RFID reader
 servomotor (torque to be calculated according to flap and skiff dimensions/profile)
+<br>
+Follow the [schematics](images/schematic.jpg) to setup the system
 
 ### Installation
 
