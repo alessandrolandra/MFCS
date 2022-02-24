@@ -118,13 +118,15 @@ TARGET and THRESHOLD are then selected by the sailor between 3 different options
 
 ### Prerequisites
 
-STM32F4xx microcontroller
-3 HC-SR04 waterproof ultrasonic sensors
-BNO085 IMU
-MFRC522 RFID reader
-servomotor (torque to be calculated according to flap and skiff dimensions/profile)
+*	STM32F4xx microcontroller
+*	3 HC-SR04 waterproof ultrasonic sensors
+*	BNO085 IMU
+*	MFRC522 RFID reader
+*	servomotor (torque to be calculated according to flap and skiff dimensions/profile)
 <br>
-Follow the [schematics](images/schematic.jpg) to setup the system
+<br>
+Follow the schematic below to setup the system:
+![schematic](images/schematic.jpg)
 
 ### Installation
 
