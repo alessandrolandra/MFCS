@@ -124,8 +124,8 @@ TARGET and THRESHOLD are then selected by the sailor between 3 different options
 *	MFRC522 RFID reader
 *	servomotor (torque to be calculated according to flap and skiff dimensions/profile)
 <br>
-<br>
 Follow the schematic below to setup the system:
+<br>
 
 ![schematic](images/schematic.jpg)
 
