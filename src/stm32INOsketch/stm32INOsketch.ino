@@ -36,8 +36,8 @@
 #include <Adafruit_BNO08x.h>
 #include <IWatchdog.h>
 
-//#define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
-#define SAMPLERATE_DELAY_MS 250 //how often to read data from the board [milliseconds]
+#define SAMPLERATE_DELAY_MS 500 //how often to read data from the board [milliseconds]
+//#define SAMPLERATE_DELAY_MS 50 //[milliseconds] in the real application this should be better to better react to the environmental changes
 
 #ifdef BUZZ  
   #define NOTE_C5  523
@@ -90,11 +90,11 @@
 #endif
 
 //aggressive PID parameters
-double aggKi=0,aggKp=0.7,aggKd=0.05;
+double aggKi=0,aggKp=5,aggKd=1.5;
 //conservative PID parameters
-double consKi=0,consKp=0.5,consKd=0.01;
+double consKi=0,consKp=3,consKd=1.2;
 
-double targetHeights[3]={700,850,1000};//target heights in mm
+double targetHeights[3]={500,850,1000};//target heights in mm
 double sensThresholds[3]={50,75,100};//sensibility thresholds in mm (how much distance from the target to change PID parameters)
 double targetHeight=targetHeights[1];
 uint16_t sensThreshold=sensThresholds[1];
@@ -166,7 +166,7 @@ void setup() {
 
     myPID.SetMode(AUTOMATIC);
     myPID.SetSampleTime(SAMPLERATE_DELAY_MS);
-    myPID.SetOutputLimits(1000, 1380); //constrain to usable crank range
+    myPID.SetOutputLimits(900, 1480); //constrain to usable crank range
 
     #ifdef WATCHDOG
       IWatchdog.begin(5000000); // Initialize the IWDG with 5 seconds timeout.
@@ -224,7 +224,7 @@ void loop() {
         if(bno085.wasReset()) {
           enableReports();
         }
-        if(checkCalibration(&sensorValue)==0){
+        if(checkCalibration(&sensorValue)==0){//calibrated
           if(firstCalibration){
             #ifdef BUZZ
               tone(BUZZER_PIN, NOTE_C5, soundDuration);
@@ -312,7 +312,7 @@ int checkCalibration(sh2_SensorValue_t *sensorValue){
       #endif
       return 1;
    }
-   if((*sensorValue).status < 2) {
+   if((*sensorValue).status >= 2) {
       return 0;
    }
    return 1;
