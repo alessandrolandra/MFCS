@@ -32,7 +32,7 @@
 <h3 align="center">MFCS21</h3>
 
   <p align="center">
-    Electronic flight control system for the moth class sailboat developed by Polito Sailing Team
+    Electronic flight control system for the moth class sailboat to be mounted on a skiff developed by Polito Sailing Team
     <br />
     <a href="https://github.com/SoC-Arch-polito/mfcs21"><strong>Explore the docs »</strong></a>
     <br />
@@ -63,7 +63,6 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
