@@ -1,1 +1,1 @@
-Here the source code and library modules used in the project
+The source code is contained in the <a href="stm32INOsketch">stm32INOsketch</a> folder, while the first project, made with Platformio, can be seen in the <a href="platformioProject_OLD">platformioProject_OLD</a> folder just as a reference to that environment, which we do not use anymore. So the last version of the code is the one in the first mentioned folder.
