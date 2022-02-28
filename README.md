@@ -28,11 +28,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/SoC-Arch-polito/mfcs21">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
-<h3 align="center">mfcs21</h3>
+<h3 align="center">MFCS21</h3>
 
   <p align="center">
     Electronic flight control system for the moth class sailboat developed by Polito Sailing Team
@@ -79,7 +76,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][images/model/model_frontview.jpg]](https://github.com/SoC-Arch-polito/mfcs21)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -101,7 +98,7 @@ In particular, our sensing system is composed of 3 ultrasonic sensors mounted on
 First of all some offsets have been added to the ultrasonic measures to consider the boat as a flat surface on which the sensor are mounted, independently of the real position of the sensors on the z axis.<br>
 Then, the following offsets have been taken into account to retrieve the impact of the orientation of the boat on each measured data:
 
-![Offset explanation](images/boatScheme.jpg)
+![Offset explanation](images/moth/boatScheme.jpg)
 
 The output of the system is the angle the flap must assume in order to reach and maintain the TARGET height.<br>
 This has been obtained using two different PIDs, a more aggressive one, to quickly reach the target, and a conservative one, to smootly maintain the height.
@@ -125,7 +122,7 @@ TARGET and THRESHOLD are then selected by the sailor between 3 different options
 *	servomotor (torque to be calculated according to flap and skiff dimensions/profile)
 <br>
 Follow the schematic below to setup the system:
-<br>
+<br> 
 
 ![schematic](images/schematic.jpg)
 
@@ -145,9 +142,12 @@ Follow the schematic below to setup the system:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Power on the device, calibrate the IMU, by performing the usual 8 in air around all the 3 different axes (a buzzer sound will let you know when the calibration is done) and mount everything in place.
+Use the wanted RFID card to change either the target height or the sensibility of the system (when to perform the switch between the two PID networks).
+Below two video example are proposed for both seeing the system in action and how to change the parameters.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+![simulation_test](videos/simulation_test.mp4)
+![parameter_change](videos/parameter_change.mp4)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -210,4 +210,3 @@ Project Link: [https://github.com/SoC-Arch-polito/mfcs21](https://github.com/SoC
 [issues-url]: https://github.com/SoC-Arch-polito/mfcs21/issues
 [license-shield]: https://img.shields.io/github/license/SoC-Arch-polito/mfcs21.svg?style=for-the-badge
 [license-url]: https://github.com/SoC-Arch-polito/mfcs21/blob/master/LICENSE.txt
-[product-screenshot]: images/frontView.jpeg
