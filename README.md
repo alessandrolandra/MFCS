@@ -76,7 +76,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][images/model/model_frontview.jpg]](https://github.com/SoC-Arch-polito/mfcs21)
+[![Project main image](images/model/model_frontview.jpg)](https://github.com/SoC-Arch-polito/mfcs21)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -155,7 +155,7 @@ Below you can find some images documenting the different phases of work followed
 
 ![components](images/model/model_components.jpg)
 ![drift](images/model/model_drift.jpg)
-![3dSupport](images/model/3dSupport.jpg)
+![3dSupport](images/model/3dSupport.jpeg)
 ![dutycycle](images/behind_the_scenes/working_on_dutycycle.jpg)
 ![soldering1](images/behind_the_scenes/working_on_soldering_1.jpg)
 ![soldering2](images/behind_the_scenes/working_on_soldering_2.jpg)
