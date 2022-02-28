@@ -106,8 +106,8 @@ TARGET and THRESHOLD are then selected by the sailor between 3 different options
 
 <hr>
 <div id="moth">The Moth is a small sailing boat designed to plane; since 2000 it has become an expensive and largely commercially-produced class of boat designed to hydroplane on foils.</div>
-<p float="left">
-  <img src="images/moth/frontView.jpg" width="100" />
+<p align="middle">
+  <img src="images/moth/frontView.jpeg" width="100" />
   <img src="images/moth/drift.jpg" width="100" />
 </p>
 <div id="imu">IMU stands for Inertial Measurement Unit, and is an electronic device that measures and reports a body's specific force, angular rate and orientation of the body, using a combination of accelerometers, gyroscopes, and sometimes magnetometers.</div>
