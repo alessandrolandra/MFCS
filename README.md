@@ -143,13 +143,22 @@ Follow the schematic below to setup the system:
 ## Usage
 
 Power on the device, calibrate the IMU, by performing the usual 8 in air around all the 3 different axes (a buzzer sound will let you know when the calibration is done) and mount everything in place.
-Use the wanted RFID card to change either the target height or the sensibility of the system (when to perform the switch between the two PID networks).
-Below two video example are proposed for both seeing the system in action and how to change the parameters.
-
-![simulation_test](videos/simulation_test.mp4)
-![parameter_change](videos/parameter_change.mp4)
+Use the wanted RFID card to change either the target height or the sensibility of the system (when to perform the switch between the two PID networks); click <a href="videos/simulation_test.mp4">here</a> for a quick demo.
+An example of how the system works and ties to maintain a certain target height is provided <a href="videos/parameter_change.mp4">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- Physical system and model building -->
+### Physical system and model building
+
+Below you can find some images documenting the different phases of work followed to build the entire system.
+
+![components](images/model/model_components.jpg)
+![drift](images/model/model_drift.jpg)
+![3dSupport](images/model/3dSupport.jpg)
+![dutycycle](images/behind_the_scenes/working_on_dutycycle.jpg)
+![soldering1](images/behind_the_scenes/working_on_soldering_1.jpg)
+![soldering2](images/behind_the_scenes/working_on_soldering_2.jpg)
 
 <!-- CONTRIBUTING -->
 ## Contributing
