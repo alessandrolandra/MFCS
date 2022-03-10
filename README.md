@@ -32,6 +32,8 @@
 <h3 align="center">MFCS21</h3>
 
   <p align="center">
+	Moth Flight Control System
+	<br />
     Electronic flight control system for the moth class sailboat to be mounted on a skiff developed by Polito Sailing Team
     <br />
     <a href="https://github.com/SoC-Arch-polito/mfcs21"><strong>Explore the docs »</strong></a>
@@ -92,7 +94,7 @@
 ### Functional Specification
 
 This project aims at automatically regulate and control the height of the flight of a <a href="#moth">Moth</a>.<br>
-Commercial products use mechanical elements to change the angle of the flap mounted below the drift, while the one on the rudder is directly regulated by the sailor. Our goal is to avoid the mechanical "measurement" of the height, using both ultrasonic sensors and an <a href="imu">IMU</a>, and automatically derive the right angle the foil must assume according to that.<br>
+Commercial products use mechanical elements to change the angle of the flap mounted below the drift, while the one on the rudder is directly regulated by the sailor. Our goal is to avoid the mechanical "measurement" of the height, using both ultrasonic sensors and an <a href="#imu">IMU</a>, and automatically derive the right angle the foil must assume according to that.<br>
 In particular, our sensing system is composed of 3 ultrasonic sensors mounted one at the bow, and the other two at stern, to the left and right extremes of the skiff, and the IMU, that allows us to retrieve the spatial orientation of the boat. Taking into account the pitch and roll angles, we can properly weight the measured distances and find the height of the center of gravity of the boat.<br>
 First of all some offsets have been added to the ultrasonic measures to consider the boat as a flat surface on which the sensor are mounted, independently of the real position of the sensors on the z axis.<br>
 Then, the following offsets have been taken into account to retrieve the impact of the orientation of the boat on each measured data:
@@ -128,6 +130,50 @@ Follow the schematic below to setup the system:
 <br> 
 
 ![schematic](images/schematic.jpg)
+#### Pin assignment
+IMU
+<br>
+<table>
+	<th>Board</th><th>Sensor</th>
+	<tr><td>PB8(SCL)</td><td>SCL</td></tr>
+	<tr><td>PB9(SDA)</td><td>SDA</td></tr>
+</table>
+<br>
+HC-SR04
+<br>
+<table>
+	<th>Board</th><th>Sensor</th>
+	<tr><td>PA0,PA1,PA4</td><td>Trig</td></tr>
+	<tr><td>PB3,PB4,PB5</td><td>Echo</td></tr>
+</table>
+<br>
+RFID
+<br>
+<table>
+	<th>Board</th><th>Sensor</th>
+	<tr><td>PA8</td><td>SS(SDA)</td></tr>
+	<tr><td>PA9</td><td>RST</td></tr>
+	<tr><td>PB13</td><td>SCK</td></tr>
+	<tr><td>PB14</td><td>MISO</td></tr>
+	<tr><td>PB15</td><td>MOSI</td></tr>
+</table>
+<br>
+Buzzer
+<br>
+<table>
+	<th>Board</th><th>Sensor</th>
+	<tr><td>PC7</td><td>+</td></tr>
+</table>
+<br>
+Servomotor
+<br>
+<table>
+	<th>Board</th><th>Sensor</th>
+	<tr><td>PB10</td><td>signal</td></tr>
+</table>
+<br>
+All the 3v3,5v and GND connections are not showed in the picture but have to be properly managed.
+
 ![CU](images/CU.jpg)
 
 ### Installation
