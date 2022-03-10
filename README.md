@@ -93,11 +93,12 @@
 The board we used is the STM32F411RE which offers the support for the Arduino Uno, and also for Arduino IDE.
 The decision to keep using Arduino Libraries is because they are very well documented, easy to use and compatible for both the Arduino Uno and our STM32 board.
 Here is the list of all libraries used for this project and the relative documentation: <br>
-* [Adafruit BNO08x IMU](./libraries/Adafruit_BNO08x/README.md)
-* [MFRC522 RFID](./libraries/MFRC522/README.md)
-* [PID](./libraries/PID/README.md)
-* [IWatchdog](./libraries/IWatchdog/README.md)
-* [Servo](./libraries/Servo/README.md)
+* [Adafruit BNO08x IMU](https://github.com/adafruit/Adafruit_BNO08x) **Adafruit library**
+* [MFRC522 RFID](https://www.arduino.cc/reference/en/libraries/mfrc522/) **Arduino library**
+* [PID](https://playground.arduino.cc/Code/PIDLibrary/) **Arduino library**
+* [IWatchdog](https://github.com/stm32duino/Arduino_Core_STM32/tree/main/libraries/IWatchdog) **ST-Microelectronics library**
+* [Servo](https://www.arduino.cc/reference/en/libraries/servo/) **Arduino library**
+
 ### Functional Specification
 
 This project aims at automatically regulate and control the height of the flight of a <a href="#moth">Moth</a>.<br>
