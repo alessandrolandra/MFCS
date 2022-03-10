@@ -98,6 +98,11 @@ Here is the list of all libraries used for this project and the relative documen
 * [PID](https://playground.arduino.cc/Code/PIDLibrary/) **Arduino library**
 * [IWatchdog](https://github.com/stm32duino/Arduino_Core_STM32/tree/main/libraries/IWatchdog) **ST-Microelectronics library**
 * [Servo](https://www.arduino.cc/reference/en/libraries/servo/) **Arduino library**
+<br>
+Talking about ultrasonic sensors, we used HC-SR04 drivers, that allows us to trigger and read the sensors through 2 digital signals.<br>
+In particular, as you can see in our <a href="src/stm32INOsketch/stm32INOsketch.ino">code</a>, we need to set as high the trigger for 10us, after keeping it low for 2us, to make the sensor emit the sound wave.<br>
+The echo pin will immediately go up and will assume the low value when the wave will be received back.
+For all the other sensors and actuators, no additional driver has been used; the RFID reader is already communicating through SPI, the servomotor is driven by a PWM and the buzzer too.
 
 ### Functional Specification
 
@@ -140,7 +145,6 @@ Follow the schematic below to setup the system:
 ![schematic](images/schematic.jpg)
 #### Pin assignment
 IMU
-<br>
 <table>
 	<th>Board</th><th>Sensor</th>
 	<tr><td>PB8(SCL)</td><td>SCL</td></tr>
@@ -181,6 +185,8 @@ Servomotor
 </table>
 <br>
 All the 3v3,5v and GND connections are not showed in the picture but have to be properly managed.
+<br>
+<br>
 
 ![CU](images/CU.jpg)
 
