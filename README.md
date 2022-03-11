@@ -273,13 +273,13 @@ Project Link: [https://github.com/SoC-Arch-polito/mfcs21](https://github.com/SoC
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/SoC-Arch-polito/mfcs21.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/badge/contributors-link-red
 [contributors-url]: https://github.com/SoC-Arch-polito/mfcs21/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SoC-Arch-polito/mfcs21.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/forks-link-blue
 [forks-url]: https://github.com/SoC-Arch-polito/mfcs21/network/members
-[stars-shield]: https://img.shields.io/github/stars/SoC-Arch-polito/mfcs21.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/stars-link-yellow
 [stars-url]: https://github.com/SoC-Arch-polito/mfcs21/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SoC-Arch-polito/mfcs21.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/badge/issues-link-orange
 [issues-url]: https://github.com/SoC-Arch-polito/mfcs21/issues
-[license-shield]: https://img.shields.io/github/license/SoC-Arch-polito/mfcs21.svg?style=for-the-badge
-[license-url]: https://github.com/SoC-Arch-polito/mfcs21/blob/main/LICENSE.txt
+[license-shield]: https://img.shields.io/badge/license-link-green
+[license-url]:https://github.com/SoC-Arch-polito/mfcs21/blob/main/LICENSE.txt
