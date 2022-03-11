@@ -102,7 +102,7 @@ Here is the list of all libraries used for this project and the relative documen
 Talking about ultrasonic sensors, we used HC-SR04 drivers, that allows us to trigger and read the sensors through 2 digital signals.<br>
 In particular, as you can see in our <a href="src/stm32INOsketch/stm32INOsketch.ino">code</a>, we need to set as high the trigger for 10us, after keeping it low for 2us, to make the sensor emit the sound wave.<br>
 The echo pin will immediately go up and will assume the low value when the wave will be received back.
-For all the other sensors and actuators, no additional driver has been used; the RFID reader is already communicating through SPI, the servomotor is driven by a PWM and the buzzer too.
+For all the other sensors and actuators, no additional driver has been used; the RFID reader is already communicating through SPI, the servomotor is driven by a PWM and the buzzer too. IMU uses I2C communication protocol.
 
 ### Functional Specification
 
