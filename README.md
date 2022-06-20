@@ -36,12 +36,12 @@
 	<br />
     Electronic flight control system for the moth class sailboat to be mounted on a skiff developed by Polito Sailing Team
     <br />
-    <a href="https://github.com/SoC-Arch-polito/mfcs21"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/alessandrolandra/PST_FlightControl"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/SoC-Arch-polito/mfcs21/issues">Report Bug</a>
+    <a href="https://github.com/alessandrolandra/PST_FlightControl/issues">Report Bug</a>
     ·
-    <a href="https://github.com/SoC-Arch-polito/mfcs21/issues">Request Feature</a>
+    <a href="https://github.com/alessandrolandra/PST_FlightControl/issues">Request Feature</a>
   </p>
 </div>
 
@@ -77,7 +77,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Project main image](images/model/model_frontview.jpg)](https://github.com/SoC-Arch-polito/mfcs21)
+[![Project main image](images/model/model_frontview.jpg)](https://github.com/alessandrolandra/PST_FlightControl)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -194,7 +194,7 @@ All the 3v3,5v and GND connections are not showed in the picture but have to be 
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/SoC-Arch-polito/mfcs21.git
+   git clone https://github.com/alessandrolandra/PST_FlightControl.git
    ```
 2. Copy all the libraries contained in <a href="libraries">libraries</a> in your respective Arduino folder
 3. Compile the <a href="src/stm32INOsketch/stm32INOsketch.ino">stm32INOsketch</a> and upload it on the board
@@ -256,7 +256,7 @@ Distributed under the MIT License. See [LICENSE](LICENSE.txt) for more informati
 
 Luca Dalmasso, Omar Gai, Alessandro Landra
 
-Project Link: [https://github.com/SoC-Arch-polito/mfcs21](https://github.com/SoC-Arch-polito/mfcs21)
+Project Link: [https://github.com/alessandrolandra/PST_FlightControl](https://github.com/alessandrolandra/PST_FlightControl)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -274,12 +274,12 @@ Project Link: [https://github.com/SoC-Arch-polito/mfcs21](https://github.com/SoC
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/contributors-link-red
-[contributors-url]: https://github.com/SoC-Arch-polito/mfcs21/graphs/contributors
+[contributors-url]: https://github.com/alessandrolandra/PST_FlightControl/graphs/contributors
 [forks-shield]: https://img.shields.io/badge/forks-link-blue
-[forks-url]: https://github.com/SoC-Arch-polito/mfcs21/network/members
+[forks-url]: https://github.com/alessandrolandra/PST_FlightControl/network/members
 [stars-shield]: https://img.shields.io/badge/stars-link-yellow
-[stars-url]: https://github.com/SoC-Arch-polito/mfcs21/stargazers
+[stars-url]: https://github.com/alessandrolandra/PST_FlightControl/stargazers
 [issues-shield]: https://img.shields.io/badge/issues-link-orange
-[issues-url]: https://github.com/SoC-Arch-polito/mfcs21/issues
+[issues-url]: https://github.com/alessandrolandra/PST_FlightControl/issues
 [license-shield]: https://img.shields.io/badge/license-link-green
-[license-url]:https://github.com/SoC-Arch-polito/mfcs21/blob/main/LICENSE.txt
+[license-url]:https://github.com/alessandrolandra/PST_FlightControl/blob/main/LICENSE.txt
